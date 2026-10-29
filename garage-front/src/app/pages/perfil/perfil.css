@@ -1,0 +1,29 @@
+.perfil {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  background: var(--modulo);
+  padding: 24px;
+  border-radius: 14px;
+  max-width: 700px;
+}
+
+.perfil-foto img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.perfil-datos {
+  flex: 1;
+}
+
+.perfil-datos h1 {
+  margin: 0 0 8px;
+}
+
+.perfil-datos p {
+  margin: 4px 0;
+  color: var(--texto-suave);
+}

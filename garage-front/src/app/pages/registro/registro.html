@@ -1,0 +1,88 @@
+<section class="pantalla">
+    <form class="recuadro" [formGroup]="formRegistro" (ngSubmit)="registrarme()">
+        <h1 class="logo">garaje</h1>
+        <h2>Crear cuenta</h2>
+
+        <div class="fila">
+            <label>
+                Nombre
+                <input type="text" formControlName="nombre" />
+            </label>
+
+            <label>
+                Apellido
+                <input type="text" formControlName="apellido" />
+            </label>
+        </div>
+
+        <label>
+            Correo
+            <input type="email" formControlName="correo" />
+        </label>
+
+        <label>
+            Nombre de usuario
+            <input type="text" formControlName="usuario" />
+        </label>
+
+        <label>
+            Contraseña
+            <input type="password" formControlName="contrasena" />
+        </label>
+
+        @if (formRegistro.controls.contrasena.invalid && formRegistro.controls.contrasena.touched) {
+        <small class="error">Mínimo 8 caracteres, una mayúscula y un número</small>
+        }
+
+        <label>
+            Repetir contraseña
+            <input type="password" formControlName="repetir" />
+        </label>
+        @if (formRegistro.controls.repetir.hasError('contrasenaCoinciden') && formRegistro.controls.repetir.touched) {
+        <small class="error">Las contraseñas no coinciden</small>
+        }
+
+        <label>Fecha de nacimiento</label>
+        <div class="fila">
+            <select formControlName="dia">
+                <option value="">Día</option>
+                @for (d of dias; track d) {
+                <option [value]="d">{{ d }}</option>
+                }
+            </select>
+
+            <select formControlName="mes">
+                <option value="">Mes</option>
+                @for (m of meses; track $index) {
+                <option [value]="$index + 1">{{ m }}</option>
+                }
+            </select>
+
+            <select formControlName="anio">
+                <option value="">Año</option>
+                @for (a of anios; track a) {
+                <option [value]="a">{{ a }}</option>
+                }
+            </select>
+        </div>
+
+        <label>
+            Descripción breve
+            <textarea formControlName="descripcion" rows="3"></textarea>
+        </label>
+
+        <label class="foto">
+            <img [src]="vistaPrevia" alt="Foto de perfil" />
+            <span class="mas">+</span>
+            <input type="file" accept="image/*" (change)="elegirFoto($event)" hidden />
+        </label>
+
+        <button type="submit">Crear cuenta</button>
+
+        @if (formRegistro.invalid && formRegistro.touched) {
+        <small class="error">Revisá los campos</small>
+        }
+
+        <p>¿Ya tenés cuenta? <a routerLink="/login">Ingresá</a></p>
+    </form>
+</section>

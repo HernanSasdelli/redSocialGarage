@@ -1,0 +1,23 @@
+
+<section class="perfil">
+    <div class= "perfil-foto">
+
+     <img [src]="usuario.foto" alt="Foto de perfil" />
+
+    </div>
+    
+    <div class="perfil-datos">
+        <h1>{{ usuario.nombre }} {{ usuario.apellido }}</h1>
+        <p>&#64;{{ usuario.usuario }}</p>
+        <p>{{ usuario.correo }}</p>
+        <p>Nacimiento: {{ usuario.fechaNacimiento }}</p>
+        <p>{{ usuario.descripcion }}</p>
+    </div>
+  
+</section>
+
+<h2>Mis últimas publicaciones</h2>
+
+@for (pub of publicaciones; track pub._id) {
+  <app-card-publicacion [publicacion]="pub" />
+}

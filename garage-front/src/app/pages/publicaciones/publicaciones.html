@@ -1,0 +1,5 @@
+<h1>Publicaciones</h1>
+
+@for (pub of publicaciones; track pub._id) {
+  <app-card-publicacion [publicacion]="pub" />
+}

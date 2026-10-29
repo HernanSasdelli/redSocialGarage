@@ -1,0 +1,48 @@
+.publicar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--modulo);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.publicar input,
+.publicar textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.publicar textarea {
+  height: 120px;
+  resize: none;
+}
+
+.subir {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+  border: 2px dashed var(--acento);
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--texto-suave);
+}
+
+.subir img {
+  width: 100%;
+  max-width: 560px;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.publicar button {
+  align-self: flex-end;
+  background: var(--acento);
+  color: var(--acento-texto);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 24px;
+  cursor: pointer;
+}

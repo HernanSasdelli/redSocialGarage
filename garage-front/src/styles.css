@@ -1,0 +1,175 @@
+/* You can add global styles to this file, and also import other style files */
+/* colores tema claro (gulf celeste y naranja) */
+:root {
+  --fondo: #A9D8F2;
+  --lateral: #7FC1E6;
+  --modulo: #E8F5FD;
+  --texto: #101820;
+  --texto-suave: #3A4A57;
+  --acento: #F47B20;
+  --acento-texto: #111111;
+  --franja: #F47B20;
+}
+
+/* colores tema oscuro: mismos nombres, otros valores */
+.oscuro {
+  --fondo: #0D0D0E;
+  --lateral: #000000;
+  --modulo: #FFFFFF;
+  --texto: #0B0B0B;
+  --texto-suave: #4A4A4A;
+  --acento: #111111;
+  --acento-texto: #FFFFFF;
+  --franja: #FFFFFF;
+}
+
+/* base de toda la pagina */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background-color: var(--fondo);
+  background-image: url('/fondo.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--texto);
+}
+
+/*REGISTRO Y LOGIN*/
+/* pantalla de login y registro: centra el recuadro */
+.pantalla {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+/* el recuadro */
+.recuadro {
+  width: 100%;
+  max-width: 420px;
+  background: var(--modulo);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.recuadro .logo {
+  margin: 0;
+  text-align: center;
+}
+
+.recuadro h2 {
+  margin: 0;
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+/* nombre del campo arriba, input abajo */
+.recuadro label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.recuadro input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--texto-suave);
+  border-radius: 6px;
+}
+/* descripcion: alto fijo, sin estirar, barra si escribe mucho */
+.recuadro textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid var(--texto-suave);
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+.recuadro button {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--acento);
+  color: var(--acento-texto);
+  cursor: pointer;
+}
+
+.recuadro p {
+  margin: 0;
+  text-align: center;
+}
+
+/* mensajes de error */
+.error {
+  color: red;
+}
+
+/* para registro: dos campos uno al lado del otro */
+.fila {
+  display: flex;
+  gap: 12px;
+}
+
+.fila label {
+  flex: 1;
+  min-width: 0;
+}
+
+/*FOTO REGISTRO*/
+.foto {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  align-self: center;
+  cursor: pointer;
+  border: 2px;
+  border-radius: 100%;
+  background: var(--fondo);
+}
+
+.foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.foto .mas {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--acento);
+  color: var(--acento-texto);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+}
+
+/* Bordes para marcar el error en imputs */
+.recuadro input.ng-touched.ng-invalid,
+.recuadro select.ng-touched.ng-invalid,
+.recuadro textarea.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+.recuadro input.ng-touched.ng-valid,
+.recuadro select.ng-touched.ng-valid,
+.recuadro textarea.ng-touched.ng-valid {
+  border: 1px solid green;
+}

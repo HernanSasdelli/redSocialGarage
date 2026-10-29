@@ -1,0 +1,27 @@
+
+<section class="pantalla">
+  <form class="recuadro" [formGroup]="formLogin" (ngSubmit)="ingresar()">
+    <h1 class="logo">garaje</h1>
+    <h2>Ingresar</h2>
+
+    <label>
+      Correo o nombre de usuario
+      <input type="text" formControlName="usuario" />
+    </label>
+
+    <label>
+      Contraseña
+      <input type="password" formControlName="contrasena"/>
+    </label>
+
+
+    <button type="submit">Ingresar</button>
+    
+    @if (formLogin.invalid && formLogin.touched)
+    {
+      <small class="error">Usuario o contraseña incorrectos</small>
+    }
+
+    <p>¿No tenés cuenta? <a routerLink="/registro">Registrate</a></p>
+  </form>
+</section>

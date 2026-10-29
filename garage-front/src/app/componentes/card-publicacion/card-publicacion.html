@@ -1,0 +1,29 @@
+<article class="card">
+  <header class="card-autor">
+    <img [src]="publicacion().autor.foto" alt="Foto" />
+    <div>
+
+      <strong>{{ publicacion().autor.usuario }}</strong>
+      <small>{{ publicacion().fecha }}</small>
+    </div>
+  </header>
+
+  <h3>{{ publicacion().titulo }}</h3>
+  <p>{{ publicacion().descripcion }}</p>
+
+  @if (publicacion().imagen) {
+    <img class="card-imagen" [src]="publicacion().imagen" alt="Imagen" />
+  }
+  
+
+  <footer class="card-acciones">
+    <button type="button">❤ {{ publicacion().meGusta.length }}</button>
+    <span>💬 {{ publicacion().comentarios.length }}</span>
+  </footer>
+
+  <ul class="card-comentarios">
+    @for (comentario of publicacion().comentarios; track comentario._id) {
+      <li><strong>{{ comentario.autor.usuario }}:</strong> {{ comentario.texto }}</li>
+    }
+  </ul>
+</article>

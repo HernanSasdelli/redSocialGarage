@@ -1,0 +1,30 @@
+<h1>Crear publicación</h1>
+
+<form class="publicar" [formGroup]="formPublicacion" (ngSubmit)="publicar()">
+  <label>
+    Título
+    <input type="text" formControlName="titulo" />
+  </label>
+  @if (formPublicacion.controls.titulo.touched && formPublicacion.controls.titulo.invalid) {
+    <small class="error">Poné un título (máximo 80 caracteres)</small>
+  }
+
+  <label>
+    ¿Qué querés contar?
+    <textarea formControlName="descripcion"></textarea>
+  </label>
+  @if (formPublicacion.controls.descripcion.touched && formPublicacion.controls.descripcion.invalid) {
+    <small class="error">Escribí algo (máximo 500 caracteres)</small>
+  }
+
+  <label class="subir">
+    @if (vistaPrevia) {
+      <img [src]="vistaPrevia" alt="Vista previa" />
+    } @else {
+      <span>+ Agregar imagen (opcional)</span>
+    }
+    <input type="file" accept="image/*" (change)="elegirImagen($event)" hidden />
+  </label>
+
+  <button type="submit">Publicar</button>
+</form>

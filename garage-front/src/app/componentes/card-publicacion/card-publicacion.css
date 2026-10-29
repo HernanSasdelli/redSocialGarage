@@ -1,0 +1,64 @@
+.card {
+  background: var(--modulo);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.card-autor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-autor img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card-autor div {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-autor small {
+  color: var(--texto-suave);
+}
+
+.card-imagen {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.card-acciones {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.card-acciones button {
+  background: none;
+  border: 1px solid var(--acento);
+  border-radius: 20px;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.card-comentarios {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  border-top: 1px solid var(--texto-suave);
+}
+
+.card-comentarios li {
+  padding: 6px 0;
+}
