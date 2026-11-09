@@ -1,18 +1,18 @@
 import { IsDateString, IsEmail, IsNotEmpty, IsOptional, IsString, Matches } from 'class-validator';
 
 export class CreateUsuarioDto {
-  @IsString()
+  @IsString({message:'El correo tiene que ser texto'})
   @IsNotEmpty({ message: 'El nombre es obligatorio'})
   nombre: string;
 
-  @IsString()
+  @IsString({message:'El correo tiene que ser texto'})
   @IsNotEmpty({ message: 'El apellido es obligatorio'})
   apellido: string;
 
   @IsEmail({}, { message: 'El correo no es válido'})
   correo: string;
 
-  @IsString()
+  @IsString({message:'El correo tiene que ser texto'})
   @IsNotEmpty({ message: 'El usuario es obligatorio'})
   usuario: string;
 
@@ -27,6 +27,6 @@ export class CreateUsuarioDto {
   fechaNacimiento: string;
 
   @IsOptional()
-  @IsString()
+  @IsString({message:'El correo tiene que ser texto'})
   descripcion?: string;
 }

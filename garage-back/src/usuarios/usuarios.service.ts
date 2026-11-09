@@ -19,9 +19,9 @@ export class UsuariosService {
 
   async create(createUsuarioDto: CreateUsuarioDto) {
     
-    const claveHash =  await bcrypt.hash( createUsuarioDto.clave , 10 );
-    //spread  
-    return await this.usuarioModel.create({ ...createUsuarioDto, clave: claveHash });
+    const claveHash = await bcrypt.hash(createUsuarioDto.clave, 10);
+    createUsuarioDto.clave = claveHash;
+    return await this.usuarioModel.create(createUsuarioDto);
   }
 
   async findAll() {
