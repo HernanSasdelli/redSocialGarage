@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { LoginDto } from './dto/login.dto';
+
 
 
 @Controller('usuarios')
@@ -35,9 +35,4 @@ export class UsuariosController {
   }
 
 
-  //LOGIN 
-  @Post('login')
-  login(@Body() loginDto: LoginDto) {
-   return this.usuariosService.login(loginDto);
-  }
 }

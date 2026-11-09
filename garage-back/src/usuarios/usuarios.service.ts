@@ -29,7 +29,7 @@ export class UsuariosService {
   }
 
   async findOne(id: string) {
-    return await this.usuarioModel.findById(id);
+     return await this.usuarioModel.findById(id).select('-clave');
   }
   update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
     return `This action updates a #${id} usuario`;
@@ -39,23 +39,23 @@ export class UsuariosService {
     return `This action removes a #${id} usuario`;
   }
 
-  ///LOGIN
-  async login(loginDto: LoginDto) {
+  ///LOGIN, pasa a auth
+  /*async login(loginDto: LoginDto) {
   const usuario = await this.usuarioModel.findOne({ correo: loginDto.correo });
   if (!usuario) {
     throw new UnauthorizedException('Credenciales inválidas');
   }
-
-
   const coincide = await bcrypt.compare(loginDto.clave, usuario.clave);
   if (!coincide) {
     throw new UnauthorizedException('Credenciales inválidas');
   }
-
   const { clave, ...usuarioSinClave } = usuario.toObject();
   return usuarioSinClave;
 }
-  
+  */
+async buscarPorCorreo(correo: string) {
+  return await this.usuarioModel.findOne({correo:correo});
+}
 
 
 
