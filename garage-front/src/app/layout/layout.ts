@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {  RouterLink, RouterOutlet } from '@angular/router';
+import {  RouterLink, RouterOutlet,Router } from '@angular/router';
+import { Auth } from '../servicios/auth';
 
 @Component({
   imports: [RouterLink, RouterOutlet],
@@ -10,5 +11,15 @@ import {  RouterLink, RouterOutlet } from '@angular/router';
 export class Layout {
 
 
+  //Constructor
+  constructor(private router: Router, private auth: Auth) {}
+
+  //Metodos
+
+  //Cerrar sesion
+  salir() {
+    this.auth.cerrarSesion();
+    this.router.navigate(['/login']);
+  }
 
 }

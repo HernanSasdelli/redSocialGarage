@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component,signal} from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
 import { ReactiveFormsModule, ValidatorFn,ValidationErrors, AbstractControl } from '@angular/forms';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { NgValidationError } from '@angular/forms/signals';
 
 import { contrasenaSegura, contrasenaCoinciden } from '../../validadores/usuario.validators';
+import { Auth } from '../../servicios/auth';
 
 //FUnciones
 
@@ -26,7 +27,9 @@ export class Registro {
 
   foto: File | null=null;
 
-  contrasena = new FormControl('', { validators: [Validators.required, contrasenaSegura()] });
+  clave = new FormControl('', { validators: [Validators.required, contrasenaSegura()] });
+
+  mensajeError = signal('');
 
   //Formulario de registro
   formRegistro = new FormGroup({
@@ -34,8 +37,8 @@ export class Registro {
     apellido: new FormControl('', {validators: [Validators.required, Validators.maxLength(30), Validators.minLength(2)]}),
     correo: new FormControl('',{ validators: [Validators.required, Validators.email]}),
     usuario: new FormControl('', {validators: [Validators.required, Validators.maxLength(20), Validators.minLength(2)]}),
-    contrasena: this.contrasena,
-    repetir: new FormControl('', {validators: [ Validators.required, contrasenaCoinciden(this.contrasena)]}),
+    clave: this.clave,
+    repetir: new FormControl('', {validators: [ Validators.required, contrasenaCoinciden(this.clave)]}),
     
     dia: new FormControl('',{ validators: [Validators.required]}),
     mes: new FormControl('',{ validators: [Validators.required]}),
@@ -45,7 +48,7 @@ export class Registro {
   });
 
     //CONSTRUCTOR
-    constructor(){
+    constructor(private router: Router, private auth: Auth){
       const anioActual = new Date().getFullYear();
       
 
@@ -64,18 +67,36 @@ export class Registro {
 
     //Metodos
     registrarme (){
+      this.mensajeError.set('');
+
       if(this.formRegistro.invalid){
         this.formRegistro.markAllAsTouched();
-        for (const nombre in this.formRegistro.controls) {
-            const control = this.formRegistro.get(nombre);
-            if (control?.invalid) {
-              console.log(nombre, control.errors);
-            }
-          }
         return;
       }
-      console.log(this.formRegistro.value, this.foto) 
-    };
+
+      let fechaNacimiento = this.armarFecha(this.formRegistro.value.dia!, this.formRegistro.value.mes!, this.formRegistro.value.anio!);
+
+      this.auth.registro(
+        this.formRegistro.value.nombre!,
+        this.formRegistro.value.apellido!,
+        this.formRegistro.value.correo!,
+        this.formRegistro.value.usuario!,
+        this.formRegistro.value.clave!,
+        fechaNacimiento,
+        this.formRegistro.value.descripcion!
+      ).subscribe({
+        next: (usuario)=> {
+          this.router.navigate(['/login']);
+        },
+        error: (error)=> {
+          if (error.status === 0){
+            this.mensajeError.set('No se pudo conectar con el servidor');
+          }else{
+            this.mensajeError.set('El correo o el nombre de usuario ya están en uso');
+          }
+        }
+      });
+    }
 
     elegirFoto(evento: any) {
         this.foto = evento.target.files[0];
@@ -85,6 +106,16 @@ export class Registro {
     }
     
 
+    //El back ESPERA: 1990-03-05
+    armarFecha(dia: string, mes: string, anio: string) {
+      if (dia.length === 1) {
+        dia = '0' + dia;
+      }
+      if (mes.length === 1) {
+        mes = '0' + mes;
+      }
+      return anio + '-' + mes + '-' + dia;
+    }
 
 
   }

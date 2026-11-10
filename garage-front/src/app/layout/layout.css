@@ -1,6 +1,61 @@
-.marco { display: flex; min-height: 100vh; }
-.lateral { width: 220px; background: var(--lateral); padding: 20px; display: flex; flex-direction: column; gap: 16px; }
-.lateral nav { display: flex; flex-direction: column; gap: 8px; }
-.lateral a { color: var(--texto); text-decoration: none; padding: 8px 12px; border-radius: 8px; }
-.lateral .crear { background: var(--acento); color: var(--acento-texto); text-align: center; }
-.contenido { flex: 1; padding: 24px; }
+.marco {
+  display: flex;
+  min-height: 100vh;
+}
+
+.lateral {
+  width: 220px;
+  background: var(--lateral);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lateral nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lateral a {
+  color: var(--texto);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.lateral .crear {
+  background: var(--acento);
+  color: var(--acento-texto);
+  text-align: center;
+}
+
+.lateral .salir {
+  margin-top: auto;
+  background: none;
+  border: none;
+  color: var(--texto);
+  text-align: left;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.contenido {
+  flex: 1;
+  padding: 24px;
+}
+
+.lateral .salir { 
+  margin-top: auto;
+  background: none;
+  border: none;
+  color: var(--texto);
+  text-align: left;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+}

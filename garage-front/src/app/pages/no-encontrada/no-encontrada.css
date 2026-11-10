@@ -1,0 +1,23 @@
+.recuadro {
+  align-items: center;
+  text-align: center;
+}
+
+.auto {
+  width: 160px;
+}
+
+.numero {
+  margin: 0;
+  font-size: 64px;
+  font-weight: bold;
+  color: var(--acento);
+}
+
+.volver {
+  padding: 12px 24px;
+  border-radius: 6px;
+  background: var(--acento);
+  color: var(--acento-texto);
+  text-decoration: none;
+}

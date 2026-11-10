@@ -19,7 +19,7 @@ export class Login {
   constructor(private router: Router, private auth: Auth) {}
   //Propiedades
   mensajeError = signal('');
-  
+
   //Formulario de logn
   formLogin = new FormGroup({
     correo: new FormControl('',{ validators: [Validators.required, Validators.email]}),
@@ -44,9 +44,11 @@ export class Login {
     //console.log(this.formLogin.value);
     this.auth.login(this.formLogin.value.correo!, this.formLogin.value.clave!).subscribe({
       next: (usuario)=> {
+        this.auth.guardarUsuario(usuario);
         this.router.navigate(['/garage/perfil']);
       },
       error: (error)=> {
+        
         if (error.status === 401){
           this.mensajeError.set('Correo o contraseña incorrectos');
         }else{

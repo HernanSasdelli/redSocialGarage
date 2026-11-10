@@ -27,10 +27,10 @@
 
         <label>
             Contraseña
-            <input type="password" formControlName="contrasena" />
+            <input type="password" formControlName="clave" />
         </label>
 
-        @if (formRegistro.controls.contrasena.invalid && formRegistro.controls.contrasena.touched) {
+        @if (formRegistro.controls.clave.invalid && formRegistro.controls.clave.touched) {
         <small class="error">Mínimo 8 caracteres, una mayúscula y un número</small>
         }
 
@@ -82,6 +82,11 @@
         @if (formRegistro.invalid && formRegistro.touched) {
         <small class="error">Revisá los campos</small>
         }
+
+        @if (mensajeError() !== '') {
+        <small class="error">{{mensajeError()}}</small>
+        }
+
 
         <p>¿Ya tenés cuenta? <a routerLink="/login">Ingresá</a></p>
     </form>
