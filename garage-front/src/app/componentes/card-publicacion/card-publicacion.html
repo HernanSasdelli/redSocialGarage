@@ -1,10 +1,10 @@
 <article class="card">
   <header class="card-autor">
-    <img [src]="publicacion().autor.foto" alt="Foto" />
+    <img [src]="publicacion().autor.foto || 'Piloto.png'" alt="Foto" />
     <div>
 
       <strong>{{ publicacion().autor.usuario }}</strong>
-      <small>{{ publicacion().fecha }}</small>
+      <small>{{ publicacion().fecha | date:'dd/MM/yyyy' }}</small>
     </div>
   </header>
 
@@ -17,12 +17,12 @@
   
 
   <footer class="card-acciones">
-    <button type="button">❤ {{ publicacion().meGusta.length }}</button>
-    <span>💬 {{ publicacion().comentarios.length }}</span>
+    <button type="button">❤ {{ publicacion().meGusta?.length ?? 0 }}</button>
+    <span>💬 {{ publicacion().comentarios?.length ?? 0 }}</span>
   </footer>
 
   <ul class="card-comentarios">
-    @for (comentario of publicacion().comentarios; track comentario._id) {
+      @for (comentario of publicacion().comentarios ?? []; track comentario._id) {
       <li><strong>{{ comentario.autor.usuario }}:</strong> {{ comentario.texto }}</li>
     }
   </ul>

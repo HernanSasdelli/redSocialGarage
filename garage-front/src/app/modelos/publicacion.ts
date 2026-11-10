@@ -5,8 +5,10 @@ export interface Publicacion {
     imagen?:string;
     fecha: string;
     autor: Autor;
-    meGusta: MeGusta[];
-    comentarios: Comentarios[];
+
+    //agregar cuando llegue
+    meGusta?: MeGusta[];
+    comentarios?: Comentarios[];
 }
 
 export interface Comentarios
