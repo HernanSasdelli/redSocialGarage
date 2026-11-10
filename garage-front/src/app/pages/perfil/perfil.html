@@ -1,8 +1,7 @@
-
 <section class="perfil">
     <div class= "perfil-foto">
 
-     <img [src]="usuario.foto" alt="Foto de perfil" />
+     <img [src]="usuario.foto || 'Piloto.png'" alt="Foto de perfil" />
 
     </div>
     
@@ -10,7 +9,7 @@
         <h1>{{ usuario.nombre }} {{ usuario.apellido }}</h1>
         <p>&#64;{{ usuario.usuario }}</p>
         <p>{{ usuario.correo }}</p>
-        <p>Nacimiento: {{ usuario.fechaNacimiento }}</p>
+        <p>Nacimiento: {{ usuario.fechaNacimiento | date:'dd/MM/yyyy' }}</p>
         <p>{{ usuario.descripcion }}</p>
     </div>
   
@@ -18,6 +17,6 @@
 
 <h2>Mis últimas publicaciones</h2>
 
-@for (pub of publicaciones; track pub._id) {
+@for (pub of publicaciones(); track pub._id) {
   <app-card-publicacion [publicacion]="pub" />
 }

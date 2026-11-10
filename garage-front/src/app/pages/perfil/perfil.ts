@@ -1,57 +1,41 @@
-import { Component } from '@angular/core';
+import { Component,inject, signal } from '@angular/core';
 import { Publicacion } from '../../modelos/publicacion';
 import { CardPublicacion } from '../../componentes/card-publicacion/card-publicacion';
 
+import { Auth } from '../../servicios/auth';
+import { DatePipe } from '@angular/common';
+import { PublicacionesService } from '../../servicios/publicaciones';
+
 @Component({
-  imports: [CardPublicacion],
+  imports: [CardPublicacion, DatePipe],
   selector: 'app-perfil',
   styleUrl: './perfil.css',
   templateUrl: './perfil.html',
 })
 export class Perfil {
 
-  usuario = {
+  //Propiedades
+  private auth = inject(Auth);
+  private publicacionesService = inject(PublicacionesService);
 
-    nombre : 'Hernan',
-    apellido :  'Sasdelli',
-    usuario : 'Her9192',
-    correo : 'hernan@gmail.com',
-    fechaNacimiento:'15/06/1990',
-    descripcion : 'Hola',
-    foto: 'Piloto.png'
+  usuario = this.auth.usuarioActual();
+  
+  //mis publicaciones
+  publicaciones = signal<Publicacion[]>([]);
 
-  };
+  //Metodos
 
-  publicaciones: Publicacion[] = [
-    {
-      _id: 'p1',
-      titulo: '¿Vibración en el Mondeo?',
-      descripcion: 'Tiembla todo al ralentí, parece una samba.',
-      fecha: '28/10/2026',
-      autor: { _id: 'u1', usuario: 'Her9192', foto: 'Piloto.png' },
-      meGusta: [{ usuario: 'u2', fecha: '28/10/2026' }],
-      comentarios: [
-        { _id: 'c1', publicacion: 'p1', autor: { _id: 'u2', usuario: 'MartinP', foto: 'Piloto.png' }, texto: 'Revisá los soportes del motor.', fecha: '28/10/2026' },
-      ],
-    },
-    {
-      _id: 'p2',
-      titulo: 'Cambio de aceite: ¿por tiempo o kilometraje?',
-      descripcion: 'Hago unos 8.000 km al año, casi todo en ciudad.',
-      fecha: '20/10/2026',
-      autor: { _id: 'u1', usuario: 'Her9192', foto: 'Piloto.png' },
-      meGusta: [],
-      comentarios: [],
-    },
-    {
-      _id: 'p3',
-      titulo: 'Un Clio viaje a Mar del Plata',
-      descripcion: 'Fue y volvió sin drama, 6 litros cada 100.',
-      imagen: 'fondo.png',
-      fecha: '15/10/2026',
-      autor: { _id: 'u1', usuario: 'Her9192', foto: 'Piloto.png' },
-      meGusta: [{ usuario: 'u2', fecha: '16/10/2026' }, { usuario: 'u3', fecha: '17/10/2026' }],
-      comentarios: [],
-    },
-  ];
+  //Cuando se abre la pantalla, traigo las publicaciones y me quedo con las mias
+  ngOnInit() {
+    this.publicacionesService.traerTodas().subscribe((lista) => {
+      const mias: Publicacion[] = [];
+      for (const pub of lista) {
+        if (pub.autor._id === this.usuario._id) {
+          mias.push(pub);
+        }
+      }
+      this.publicaciones.set(mias);
+    });
+  }
+
 }
