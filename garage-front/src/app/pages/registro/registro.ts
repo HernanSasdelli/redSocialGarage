@@ -86,7 +86,8 @@ export class Registro {
         this.formRegistro.value.usuario!,
         this.formRegistro.value.clave!,
         fechaNacimiento,
-        this.formRegistro.value.descripcion!
+        this.formRegistro.value.descripcion!,
+        this.foto
       ).subscribe({
         next: () => this.registrado.set(true),
         error: (error) => this.mostrarError(error)

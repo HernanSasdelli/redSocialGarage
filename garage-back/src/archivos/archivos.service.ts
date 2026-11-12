@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { v2 as cloudinary } from 'cloudinary';
-import { Express } from 'express';
+
 
 @Injectable()
 export class ArchivosService {
@@ -20,14 +20,14 @@ export class ArchivosService {
         {folder:'garage', resource_type:'image'},
         (error, resultado) => {
           if (error || !resultado) {
-            reject(error);
+            reject(new InternalServerErrorException('No se pudo subir la imagen'));
             return;
           }
           resolve(resultado.secure_url);
         },
       );
-      subida.on('error', (error) => reject(error));
-      subida.end(archivo.buffer);
+        subida.on('error', () => reject(new InternalServerErrorException('No se pudo subir la imagen')));
+        subida.end(archivo.buffer);
     });
   }
 }

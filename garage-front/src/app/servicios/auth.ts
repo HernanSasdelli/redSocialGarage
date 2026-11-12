@@ -22,7 +22,7 @@ export class Auth {
     }
 
       //Registro
-    registro(nombre: string, apellido: string, correo: string, usuario: string, clave: string, fechaNacimiento: string, descripcion: string) {
+    /*registro(nombre: string, apellido: string, correo: string, usuario: string, clave: string, fechaNacimiento: string, descripcion: string) {
         return this.http.post(environment.apiUrl + '/auth/registro', {
         nombre:nombre,
         apellido:apellido,
@@ -32,6 +32,24 @@ export class Auth {
         fechaNacimiento:fechaNacimiento,
         descripcion:descripcion
         });
+    }*/
+   //Registro armado con FormData para Cloudinary
+   registro(nombre: string, apellido:string,correo:string , usuario:string,clave:string,fechaNacimiento:string,descripcion:string,
+    foto:File|null){
+        const datos=new FormData();
+        datos.append('nombre', nombre);
+        datos.append('apellido', apellido);
+        datos.append('correo', correo);
+        datos.append('usuario', usuario);
+        datos.append('clave', clave;
+        datos.append('fechaNacimiento', fechaNacimiento);
+        datos.append('descripcion', descripcion);
+        if(foto){
+            datos.append('foto', foto);
+
+        }
+        return this.http.post(environment.apiUrl + '/auth/registro', datos)
+
     }
 
     //capturo el usuario y parceo a texto
