@@ -21,7 +21,7 @@ export class PublicacionesService {
     });
   }
 
-  //Traer todas las publicaciones
+  
   traerTodas() {
     return this.http.get<Publicacion[]>(environment.apiUrl + '/publicaciones');
   }

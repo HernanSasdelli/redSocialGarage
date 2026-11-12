@@ -19,8 +19,6 @@ export class CreateUsuarioDto {
   @Matches(/^(?=.*[A-Z])(?=.*\d).{8,}$/, {
     message: 'La clave debe tener al menos 8 caracteres, una mayúscula y un número',
   })
-
-
   clave: string;
 
   @IsDateString({}, { message: 'La fecha de nacimiento no es válida' })

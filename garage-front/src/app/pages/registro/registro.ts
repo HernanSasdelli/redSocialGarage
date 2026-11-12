@@ -6,6 +6,7 @@ import { NgValidationError } from '@angular/forms/signals';
 
 import { contrasenaSegura, contrasenaCoinciden } from '../../validadores/usuario.validators';
 import { Auth } from '../../servicios/auth';
+import { HttpErrorResponse } from '@angular/common/http';
 
 //FUnciones
 
@@ -88,13 +89,7 @@ export class Registro {
         next: (usuario)=> {
           this.router.navigate(['/login']);
         },
-        error: (error)=> {
-          if (error.status === 0){
-            this.mensajeError.set('No se pudo conectar con el servidor');
-          }else{
-            this.mensajeError.set('El correo o el nombre de usuario ya están en uso');
-          }
-        }
+        error: (error) => this.mostrarError(error)
       });
     }
 
@@ -117,6 +112,17 @@ export class Registro {
       return anio + '-' + mes + '-' + dia;
     }
 
+    mostrarError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      this.mensajeError.set('No se pudo conectar con el servidor');
+    } else if (error.status === 409) {
+      this.mensajeError.set(error.error.message);
+    } else if (error.status === 400) {
+      this.mensajeError.set(error.error.message.join(', '));
+    } else {
+      this.mensajeError.set('No se pudo crear la cuenta, probá de nuevo');
+    }
+  }
 
   }
 

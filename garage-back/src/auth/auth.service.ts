@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException,ConflictException } from '@nestjs/common';
 
 import { UsuariosService } from '../usuarios/usuarios.service';
 import { UsuariosModule } from '../usuarios/usuarios.module';
@@ -12,6 +12,14 @@ export class AuthService {
     constructor(private usuariosService: UsuariosService) {}
 
         async registro(createUsuarioDto: CreateUsuarioDto) {
+            const correoExiste = await this.usuariosService.buscarPorCorreo(createUsuarioDto.correo);
+            if (correoExiste) {
+            throw new ConflictException('El correo ya está en uso');
+            }
+            const usuarioExiste = await this.usuariosService.buscarPorUsuario(createUsuarioDto.usuario);
+            if (usuarioExiste) {
+            throw new ConflictException('El nombre de usuario ya está en uso');
+            }
             const usuarioNuevo = await this.usuariosService.create(createUsuarioDto);
             return await this.usuariosService.findOne(usuarioNuevo._id.toString());
         }

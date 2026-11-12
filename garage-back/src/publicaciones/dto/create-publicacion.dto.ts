@@ -8,7 +8,7 @@ export class CreatePublicacionDto {
 
   @IsString({ message: 'La descripción debe ser texto' })
   @IsNotEmpty({ message: 'La descripción es obligatoria' })
-  @MaxLength(500, { message: 'La descripción puede tener hasta 500 caracteres' })
+  @MaxLength(400, { message: 'La descripción puede tener hasta 400 caracteres' })
   descripcion: string;
 
   @IsMongoId({ message: 'El autor no es válido' })

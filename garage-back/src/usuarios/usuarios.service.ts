@@ -1,4 +1,4 @@
-import { Injectable,UnauthorizedException } from '@nestjs/common';
+import { Injectable,UnauthorizedException,ConflictException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
@@ -39,25 +39,14 @@ export class UsuariosService {
     return `This action removes a #${id} usuario`;
   }
 
-  ///LOGIN, pasa a auth
-  /*async login(loginDto: LoginDto) {
-  const usuario = await this.usuarioModel.findOne({ correo: loginDto.correo });
-  if (!usuario) {
-    throw new UnauthorizedException('Credenciales inválidas');
-  }
-  const coincide = await bcrypt.compare(loginDto.clave, usuario.clave);
-  if (!coincide) {
-    throw new UnauthorizedException('Credenciales inválidas');
-  }
-  const { clave, ...usuarioSinClave } = usuario.toObject();
-  return usuarioSinClave;
-}
-  */
+
 async buscarPorCorreo(correo: string) {
   return await this.usuarioModel.findOne({correo:correo});
 }
 
-
+async buscarPorUsuario(usuario: string) {
+  return await this.usuarioModel.findOne({usuario:usuario});
+}
 
 
 
