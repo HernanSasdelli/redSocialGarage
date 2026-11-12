@@ -7,12 +7,13 @@ import { NgValidationError } from '@angular/forms/signals';
 import { contrasenaSegura, contrasenaCoinciden } from '../../validadores/usuario.validators';
 import { Auth } from '../../servicios/auth';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Modal } from '../../componentes/modal/modal';
 
 //FUnciones
 
 
 @Component({
-  imports: [ReactiveFormsModule,RouterLink],
+  imports: [ReactiveFormsModule,RouterLink, Modal],
   selector: 'app-registro',
   styleUrl: './registro.css',
   templateUrl: './registro.html',
@@ -31,6 +32,7 @@ export class Registro {
   clave = new FormControl('', { validators: [Validators.required, contrasenaSegura()] });
 
   mensajeError = signal('');
+  registrado = signal(false);
 
   //Formulario de registro
   formRegistro = new FormGroup({
@@ -86,9 +88,7 @@ export class Registro {
         fechaNacimiento,
         this.formRegistro.value.descripcion!
       ).subscribe({
-        next: (usuario)=> {
-          this.router.navigate(['/login']);
-        },
+        next: () => this.registrado.set(true),
         error: (error) => this.mostrarError(error)
       });
     }
@@ -113,16 +113,20 @@ export class Registro {
     }
 
     mostrarError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      this.mensajeError.set('No se pudo conectar con el servidor');
-    } else if (error.status === 409) {
-      this.mensajeError.set(error.error.message);
-    } else if (error.status === 400) {
-      this.mensajeError.set(error.error.message.join(', '));
-    } else {
-      this.mensajeError.set('No se pudo crear la cuenta, probá de nuevo');
+      if (error.status === 0) {
+        this.mensajeError.set('No se pudo conectar con el servidor');
+      } else if (error.status === 409) {
+        this.mensajeError.set(error.error.message);//muestra el mensaje como viene del back
+
+      } else if (error.status === 400) {
+        this.mensajeError.set(error.error.message.join(', '));
+      } else {
+        this.mensajeError.set('No se pudo crear la cuenta, probá de nuevo');
+      }
     }
-  }
+    irAlLogin() {
+      this.router.navigate(['/login']);
+    }
 
   }
 

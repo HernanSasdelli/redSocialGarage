@@ -161,6 +161,10 @@ body {
   font-size: 22px;
 }
 
+  .error {
+     text-align: center;
+   }
+
 /* Bordes para marcar el error en imputs */
 .recuadro input.ng-touched.ng-invalid,
 .recuadro select.ng-touched.ng-invalid,

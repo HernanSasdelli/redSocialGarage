@@ -89,5 +89,17 @@
 
 
         <p>¿Ya tenés cuenta? <a routerLink="/login">Ingresá</a></p>
+
+        
     </form>
+
+    
 </section>
+
+@if (registrado()) {
+<app-modal
+    titulo="¡Bienvenido al garage!"
+    
+    textoBoton="Ingresar"
+    (aceptar)="irAlLogin()" />
+}
