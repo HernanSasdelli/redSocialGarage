@@ -21,8 +21,10 @@ export class AuthController {
 
   @Post('registro')
   @UseInterceptors(FileInterceptor('foto', {storage:memoryStorage(), limits:{fileSize:5 * 1024 * 1024}}))
-  registro(@Body() createUsuarioDto: CreateUsuarioDto) {
-    return this.authService.registro(createUsuarioDto);
+  registro(@Body() createUsuarioDto: CreateUsuarioDto, 
+  @UploadedFile() foto: Express.Multer.File) 
+  {
+    return this.authService.registro(createUsuarioDto, foto);
   }
 
 }
