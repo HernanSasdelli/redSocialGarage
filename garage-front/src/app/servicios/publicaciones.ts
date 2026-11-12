@@ -12,15 +12,17 @@ export class PublicacionesService {
 
                          //Metodos
 
-  //Crear publicacion
-  crear(titulo: string, descripcion: string, autor: string) {
-    return this.http.post(environment.apiUrl + '/publicaciones', {
-      titulo:titulo,
-      descripcion:descripcion,
-      autor:autor
-    });
+  //Crear publicacion (ahora es form data por la foto)
+  crear(titulo: string, descripcion: string, autor: string, imagen: File | null) {
+    const datos = new FormData();
+    datos.append('titulo', titulo);
+    datos.append('descripcion', descripcion);
+    datos.append('autor', autor);
+    if (imagen) {
+      datos.append('imagen', imagen);
+    }
+    return this.http.post(environment.apiUrl + '/publicaciones', datos);
   }
-
   
   traerTodas() {
     return this.http.get<Publicacion[]>(environment.apiUrl + '/publicaciones');
