@@ -14,7 +14,7 @@ export class AuthService {
         async registro(createUsuarioDto: CreateUsuarioDto) {
             const correoExiste = await this.usuariosService.buscarPorCorreo(createUsuarioDto.correo);
             if (correoExiste) {
-            throw new ConflictException('El correo ya está en uso');
+            throw new ConflictException('El correo ya está en uso');//ya tiene seteado el 409
             }
             const usuarioExiste = await this.usuariosService.buscarPorUsuario(createUsuarioDto.usuario);
             if (usuarioExiste) {
