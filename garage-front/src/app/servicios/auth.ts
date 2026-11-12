@@ -41,7 +41,7 @@ export class Auth {
         datos.append('apellido', apellido);
         datos.append('correo', correo);
         datos.append('usuario', usuario);
-        datos.append('clave', clave;
+        datos.append('clave', clave);
         datos.append('fechaNacimiento', fechaNacimiento);
         datos.append('descripcion', descripcion);
         if(foto){
