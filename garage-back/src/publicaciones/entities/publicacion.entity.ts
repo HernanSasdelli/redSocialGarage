@@ -9,6 +9,9 @@ export class Publicacion {
   @Prop({ required: true })
   descripcion: string;
 
+  @Prop({ default: '' })
+  imagen: string;
+
   @Prop({ type: Types.ObjectId, ref: 'Usuario', required: true })
   autor: Types.ObjectId;
 

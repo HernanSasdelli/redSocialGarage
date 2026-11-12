@@ -1,4 +1,4 @@
-import { IsMongoId, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsMongoId, IsNotEmpty, IsString, MaxLength, IsOptional } from 'class-validator';
 
 export class CreatePublicacionDto {
   @IsString({ message: 'El título debe ser texto' })
@@ -13,4 +13,7 @@ export class CreatePublicacionDto {
 
   @IsMongoId({ message: 'El autor no es válido' })
   autor: string;
+
+  @IsOptional()
+  imagen?: string;
 }

@@ -94,12 +94,21 @@ export class Registro {
       });
     }
 
-    elegirFoto(evento: any) {
-        this.foto = evento.target.files[0];
-        if (this.foto) {
-          this.vistaPrevia = URL.createObjectURL(this.foto);
+      elegirFoto(evento: any) {
+        const archivo = evento.target.files[0];
+        if (!archivo) {
+          return;
+        }        
+        if (archivo.size > 5 * 1024 * 1024) {
+          this.mensajeError.set('La imagen no puede pesar más de 5 MB');
+          evento.target.value = '';
+          return;
         }
-    }
+        this.mensajeError.set('');
+        this.foto = archivo;
+        this.vistaPrevia = URL.createObjectURL(archivo);
+      }
+
     
 
     //El back ESPERA: 1990-03-05
