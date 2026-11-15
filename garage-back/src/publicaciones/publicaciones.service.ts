@@ -29,7 +29,7 @@ export class PublicacionesService {
   async findOne(id: string) {
      return await this.publicacionModel
     .findById(id)
-    //.sort({fecha: -1})
+    
     .populate('autor','nombre apellido usuario foto');
   }
 

@@ -40,12 +40,12 @@ export class UsuariosService {
   }
 
 
-async buscarPorCorreo(correo: string) {
-  return await this.usuarioModel.findOne({correo:correo});
-}
+  async buscarPorCorreo(correo: string) {
+    return await this.usuarioModel.findOne({correo:correo});
+  }
 
-async buscarPorUsuario(usuario: string) {
-  return await this.usuarioModel.findOne({usuario:usuario});
+  async buscarPorUsuario(usuario: string) {
+    return await this.usuarioModel.findOne({usuario:usuario});
 }
 
 
