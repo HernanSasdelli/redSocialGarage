@@ -5,12 +5,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Publicacion } from './entities/publicacion.entity';
 import { Model,Types } from 'mongoose';
 
+import { ConsultasService } from '../consultas/consultas.service';
+import { ConsultaPublicacionesDto } from './dto/consulta-publicaciones.dto';
 
 
 @Injectable()
 export class PublicacionesService {
 
-  constructor(@InjectModel(Publicacion.name) private publicacionModel: Model<Publicacion>) {}
+  constructor(@InjectModel(Publicacion.name) private publicacionModel: Model<Publicacion>,
+   private consultasService: ConsultasService) {}
 
 
   async create(createPublicacionDto: CreatePublicacionDto) {
@@ -18,13 +21,44 @@ export class PublicacionesService {
     ///'This action adds a new publicacione';
   }
 
-  async findAll() {
+  armarFiltro(autor?: string) {
+    const filtro: { activo: boolean, autor?: string } = {activo:true};//soo activas 
+      if (autor !== undefined) {//y si viene el autor va con autor
+        filtro.autor = autor;
+    }
+    return filtro;
+  }
+
+
+
+  
+  async buscar(consulta: ConsultaPublicacionesDto) {
+
+    //me armo todos los parametros
+    const filtro = this.armarFiltro(consulta.autor);
+    const orden = this.consultasService.armarOrden(consulta.orden);
+    const pagina = this.consultasService.armarPagina(consulta.offset, consulta.limit);
+
+    //y los uso en las publicaciones segun lo que traje
+    const publicaciones = await this.publicacionModel
+      .find(filtro)
+      .sort(orden)
+      .skip(pagina.offset)
+      .limit(pagina.limit)
+      .populate('autor','nombre apellido usuario foto');
+
+    const total = await this.publicacionModel.countDocuments(filtro);
+
+    return {publicaciones:publicaciones, total:total};
+  }
+
+  /*async findAll() {
     return await this.publicacionModel
     //.findOne({activo: true}) trae una sola
     .find({activo: true})
     .sort({fecha: -1})
     .populate('autor','nombre apellido usuario foto');
-  }
+  }*/
 
   async findOne(id: string) {
      return await this.publicacionModel
@@ -62,7 +96,7 @@ export class PublicacionesService {
     return false;
   }
 
-  //llega la lista y le saco el me gusta y la devuelvo
+  //llega la lista y le saco el me gusta y la devuvelvo 
   quitarMeGusta(lista: { usuario: Types.ObjectId, fecha: Date }[], usuario: string) {
     const nueva: { usuario: Types.ObjectId, fecha: Date }[] = [];
     for (const megusta of lista) {
@@ -73,7 +107,10 @@ export class PublicacionesService {
     return nueva;
   }
 
-  //sacar y poner me gusta
+  //sacar y poner me gusta a mongo
+
+
+  //poner
     async darMeGusta(id: string, usuario: string) {
     const publicacion = await this.buscarActiva(id);
     if (this.yaDioMeGusta(publicacion.meGusta, usuario)) {
@@ -83,6 +120,8 @@ export class PublicacionesService {
     return await this.guardarMeGusta(id, publicacion.meGusta);
   }
 
+
+  //sacar
   async sacarMeGusta(id: string, usuario: string) {
     const publicacion = await this.buscarActiva(id);
     const lista = this.quitarMeGusta(publicacion.meGusta, usuario);

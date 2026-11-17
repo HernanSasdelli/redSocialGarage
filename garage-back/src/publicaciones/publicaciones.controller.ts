@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete,UseInterceptors,UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete,UseInterceptors,UploadedFile, Query } from '@nestjs/common';
 import { PublicacionesService } from './publicaciones.service';
 import { CreatePublicacionDto } from './dto/create-publicacion.dto';
 import { UpdatePublicacionDto } from './dto/update-publicacion.dto';
@@ -7,9 +7,12 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { MeGustaDto } from './dto/me-gusta.dto';
 
+import { ConsultaPublicacionesDto } from './dto/consulta-publicaciones.dto';
+
 @Controller('publicaciones')
 export class PublicacionesController {
-  constructor(private readonly publicacionesService: PublicacionesService, private archivosService: ArchivosService) {}
+  constructor(private readonly publicacionesService: PublicacionesService,
+     private archivosService: ArchivosService) {}
 /*
   @Post()
   create(@Body() createPublicacioneDto: CreatePublicacionDto) {
@@ -38,8 +41,8 @@ export class PublicacionesController {
 
     
   @Get()
-  findAll() {
-    return this.publicacionesService.findAll();
+  findAll(@Query() consulta: ConsultaPublicacionesDto) {
+    return this.publicacionesService.buscar(consulta);
   }
 
   @Get(':id')

@@ -8,9 +8,10 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { PublicacionesModule } from './publicaciones/publicaciones.module';
 import { AuthModule } from './auth/auth.module';
 import { ArchivosModule } from './archivos/archivos.module';
+import { ConsultasModule } from './consultas/consultas.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_URI!), UsuariosModule, PublicacionesModule, AuthModule, ArchivosModule],
+  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(process.env.MONGO_URI!), UsuariosModule, PublicacionesModule, AuthModule, ArchivosModule, ConsultasModule],
   controllers: [AppController],
   providers: [AppService],
 })

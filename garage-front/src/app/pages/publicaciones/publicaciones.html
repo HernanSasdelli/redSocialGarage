@@ -1,5 +1,20 @@
 <h1>Publicaciones</h1>
 
+<div class="ordenar">
+  <button type="button" [class.activo]="orden() === 'fecha'" (click)="ordenarPor('fecha')">Más recientes</button>
+  <button type="button" [class.activo]="orden() === 'meGusta'" (click)="ordenarPor('meGusta')">Más me gusta</button>
+</div>
+
 @for (pub of publicaciones(); track pub._id) {
   <app-card-publicacion [publicacion]="pub" />
+} @empty {
+  <p class="vacio">Todavía no hay publicaciones.</p>
+}
+
+@if (totalPaginas() > 1) {
+  <div class="paginado">
+    <button type="button" [disabled]="!hayAnterior()" (click)="anterior()">Anterior</button>
+    <span>Página {{ paginaActual() }} de {{ totalPaginas() }}</span>
+    <button type="button" [disabled]="!haySiguiente()" (click)="siguiente()">Siguiente</button>
+  </div>
 }

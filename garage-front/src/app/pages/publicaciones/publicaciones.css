@@ -9,3 +9,50 @@
   margin-bottom: 16px;
 }
 
+.ordenar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.ordenar button {
+  background: var(--modulo);
+  border: 1px solid var(--lateral);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.ordenar button.activo {
+  background: var(--acento);
+  border-color: var(--acento);
+  font-weight: 700;
+}
+
+.paginado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.paginado button {
+  background: var(--acento);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.paginado button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.vacio {
+  text-align: center;
+}

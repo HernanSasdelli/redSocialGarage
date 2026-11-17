@@ -33,3 +33,8 @@ export interface MeGusta{
     usuario: string;
     fecha: string;
 }
+
+export interface Resultado {
+    publicaciones: Publicacion[];
+    total: number;
+}

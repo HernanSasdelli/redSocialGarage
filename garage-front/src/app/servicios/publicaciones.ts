@@ -3,6 +3,8 @@ import { Publicacion } from '../modelos/publicacion';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
+import { Publicacion, Resultado } from '../modelos/publicacion';
+
 @Injectable({providedIn:'root'})
 
 export class PublicacionesService {
@@ -23,11 +25,22 @@ export class PublicacionesService {
     }
     return this.http.post(environment.apiUrl + '/publicaciones', datos);
   }
-  
+  /*
   traerTodas() {
     return this.http.get<Publicacion[]>(environment.apiUrl + '/publicaciones');
+  }*/
+
+  
+  traer(orden: string, offset: number, limit: number, autor?: string) {
+    let direccion = environment.apiUrl + '/publicaciones?orden=' + orden + '&offset=' + offset + '&limit=' + limit;
+    if (autor) {
+      direccion = direccion + '&autor=' + autor;
+    }
+    return this.http.get<Resultado>(direccion);
   }
 
+
+  
   darMeGusta(idPublicacion: string, usuario: string) {
    return this.http.post<Publicacion>(environment.apiUrl + '/publicaciones/' +
     idPublicacion + '/me-gusta', {usuario:usuario});
