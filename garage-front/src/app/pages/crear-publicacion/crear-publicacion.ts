@@ -70,7 +70,10 @@ export class CrearPublicacion {
       this.imagen
     ).subscribe({
       next: () => this.router.navigate(['/garage/publicaciones']),
-      error: (error) => this.mostrarError(error)
+      error: (error) => {
+        this.enviando.set(false);
+        this.mostrarError(error);
+      }
     });
   }
     mostrarError(error: HttpErrorResponse) {
