@@ -1,17 +1,61 @@
 <div class="marco">
+
+  <!-- menu: columna sobre el fondo, sin franja de color -->
   <aside class="lateral">
-    <h2>garaje</h2>
+    <div class="logo">
+      <span class="cuadro">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>
+      </span>
+      garaje
+    </div>
+
     <nav>
-      <a routerLink="/garage/publicaciones">Inicio</a>
-      <a routerLink="/garage/notificaciones">Notificaciones</a>
-      <a routerLink="/garage/actividad">Actividad</a>
-      <a routerLink="/garage/perfil">Mi perfil</a>
+      <a routerLink="/garage/publicaciones" routerLinkActive="activo">
+        <svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>
+        Inicio
+      </a>
+      <a routerLink="/garage/notificaciones" routerLinkActive="activo">
+        <svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>
+        Notificaciones
+      </a>
+      <a routerLink="/garage/actividad" routerLinkActive="activo">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Actividad
+      </a>
+      <a routerLink="/garage/perfil" routerLinkActive="activo">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        Mi perfil
+      </a>
     </nav>
-    <a class="crear" routerLink="/garage/publicar">Crear publicación</a>
-    <button class="salir" type="button" (click)="salir()">Cerrar sesión</button>
+
+    <a class="crear" routerLink="/garage/publicar">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      Crear publicación
+    </a>
+
+    <hr />
+
+    <button class="salir" type="button" (click)="salir()">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+      Cerrar sesión
+    </button>
+
+    <div class="pie">garaje · 2026</div>
   </aside>
 
+  <!-- centro: la pantalla de cada ruta -->
   <main class="contenido">
     <router-outlet />
   </main>
+
+  <!-- derecha: el numero y las franjas Gulf -->
+  <aside class="derecha">
+    <div class="franjas">
+      <span></span>
+      <span class="gruesa"></span>
+      <span></span>
+    </div>
+    <div class="numero">9</div>
+  </aside>
+
 </div>

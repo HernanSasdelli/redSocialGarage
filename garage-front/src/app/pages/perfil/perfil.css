@@ -27,3 +27,16 @@
   margin: 4px 0;
   color: var(--texto-suave);
 }
+
+.ver-mas {
+  display: block;
+  margin: 8px auto 24px;
+  background: var(--acento);
+  color: var(--acento-texto);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 24px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}

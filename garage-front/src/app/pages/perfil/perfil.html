@@ -20,3 +20,7 @@
 @for (pub of publicaciones(); track pub._id) {
   <app-card-publicacion [publicacion]="pub" />
 }
+
+@if (hayMas()) {
+  <button type="button" class="ver-mas" (click)="verMas()">Ver más publicaciones</button>
+}

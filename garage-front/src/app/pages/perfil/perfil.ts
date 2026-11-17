@@ -22,20 +22,32 @@ export class Perfil {
   
   //mis publicaciones
   publicaciones = signal<Publicacion[]>([]);
+  total = signal(0);
+  limit = 3;
+
 
   //Metodos
 
-  //Cuando se abre la pantalla, traigo las publicaciones y me quedo con las mias
   ngOnInit() {
-    this.publicacionesService.traerTodas().subscribe((lista) => {
-      const mias: Publicacion[] = [];
-      for (const pub of lista) {
-        if (pub.autor._id === this.usuario._id) {
-          mias.push(pub);
-        }
+     this.verMas();
+  }
+
+  verMas() {
+    const desde = this.publicaciones().length;
+    this.publicacionesService.traer('fecha', desde, this.limit, this.usuario._id).subscribe((resultado) => {
+      const lista = this.publicaciones();
+      for (const pub of resultado.publicaciones) {
+        lista.push(pub);
       }
-      this.publicaciones.set(mias);
+      this.publicaciones.set([...lista]);
+      this.total.set(resultado.total);
     });
+  }
+
+
+  //veo el largo, si el largo es +chico que el total, hay mas publicaciones
+  hayMas() {
+    return this.publicaciones().length < this.total();
   }
 
 }

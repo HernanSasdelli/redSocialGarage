@@ -80,6 +80,14 @@ export class CrearPublicacion {
       this.mensajeError.set('No se pudo publicar, probá de nuevo');
     }
   }
+    //cuantos caracteres le quedan a la descripcion-JAS
+  caracteresRestantes() {
+    const texto = this.formPublicacion.controls.descripcion.value;
+    if (texto === null) {
+      return 400;
+    }
+    return 400 - texto.length;
+  }
 
 
 

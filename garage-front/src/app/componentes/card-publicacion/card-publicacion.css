@@ -1,8 +1,9 @@
 .card {
   background: var(--modulo);
   border-radius: 14px;
-  padding: 16px 20px;
+  padding: 18px 20px 14px;
   margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(16, 24, 32, 0.08);
 }
 
 .card-autor {
@@ -16,6 +17,7 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  background: #FFFFFF;
 }
 
 .card-autor div {
@@ -23,42 +25,71 @@
   flex-direction: column;
 }
 
-.card-autor small {
-  color: var(--texto-suave);
+.card-autor .nombre {
+  font-weight: 600;
 }
 
+.card-autor small {
+  color: var(--texto-suave);
+  font-size: 12px;
+}
+
+.card h3 {
+  margin: 14px 0 6px;
+  font-size: 17px;
+}
+
+.card p {
+  margin: 0 0 12px;
+  line-height: 1.45;
+}
+
+/* la imagen entra entera, sin recortarse */
 .card-imagen {
   display: block;
   width: 100%;
-  max-width: 560px;
-  max-height: 240px;
-  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: var(--fondo);
   border-radius: 10px;
-  margin-top: 8px;
+  margin-bottom: 12px;
 }
 
+/* acciones sueltas, sin recuadro */
 .card-acciones {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   align-items: center;
-  margin-top: 12px;
+  border-top: 1px solid var(--lateral);
+  padding-top: 10px;
 }
 
-.card-acciones button {
-  background: none;
-  border: 1px solid var(--acento);
-  border-radius: 20px;
-  padding: 4px 12px;
-  cursor: pointer;
+.comentarios {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.comentarios svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .card-comentarios {
   list-style: none;
-  padding: 0;
-  margin: 12px 0 0;
-  border-top: 1px solid var(--texto-suave);
+  padding: 10px 0 0;
+  margin: 10px 0 0;
+  border-top: 1px solid var(--lateral);
+  font-size: 14px;
 }
 
 .card-comentarios li {
-  padding: 6px 0;
+  padding: 4px 0;
 }

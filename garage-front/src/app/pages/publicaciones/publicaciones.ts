@@ -37,6 +37,8 @@ export class Publicaciones {
       this.total.set(resultado.total);
     });
   
+}
+
 
   ordenarPor(orden: string) {
     this.orden.set(orden);

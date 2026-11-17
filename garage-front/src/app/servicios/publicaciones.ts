@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Publicacion } from '../modelos/publicacion';
+
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -40,7 +40,7 @@ export class PublicacionesService {
   }
 
 
-  
+
   darMeGusta(idPublicacion: string, usuario: string) {
    return this.http.post<Publicacion>(environment.apiUrl + '/publicaciones/' +
     idPublicacion + '/me-gusta', {usuario:usuario});

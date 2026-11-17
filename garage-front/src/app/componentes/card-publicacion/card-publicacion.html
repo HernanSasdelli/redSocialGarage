@@ -2,8 +2,7 @@
   <header class="card-autor">
     <img [src]="publicacion().autor.foto || 'Piloto.png'" alt="Foto" />
     <div>
-
-      <strong>{{ publicacion().autor.usuario }}</strong>
+      <span class="nombre">{{ publicacion().autor.usuario }}</span>
       <small>{{ publicacion().fecha | date:'dd/MM/yyyy' }}</small>
     </div>
   </header>
@@ -14,20 +13,24 @@
   @if (publicacion().imagen) {
     <img class="card-imagen" [src]="publicacion().imagen" alt="Imagen" />
   }
-  
 
   <footer class="card-acciones">
     <app-rueda-me-gusta
       [encendida]="yaDiMeGusta()"
       [cantidad]="cantidadMeGusta()"
       (tocar)="tocarMeGusta()" />
-   
-    <span>💬 {{ publicacion().comentarios?.length ?? 0 }}</span>
+
+    <span class="comentarios">
+      <svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+      {{ publicacion().comentarios?.length ?? 0 }} comentarios
+    </span>
   </footer>
 
-  <ul class="card-comentarios">
+  @if ((publicacion().comentarios ?? []).length > 0) {
+    <ul class="card-comentarios">
       @for (comentario of publicacion().comentarios ?? []; track comentario._id) {
-      <li><strong>{{ comentario.autor.usuario }}:</strong> {{ comentario.texto }}</li>
-    }
-  </ul>
+        <li><strong>{{ comentario.autor.usuario }}:</strong> {{ comentario.texto }}</li>
+      }
+    </ul>
+  }
 </article>
