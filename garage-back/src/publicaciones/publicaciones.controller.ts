@@ -5,6 +5,7 @@ import { UpdatePublicacionDto } from './dto/update-publicacion.dto';
 import { ArchivosService } from '../archivos/archivos.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
+import { MeGustaDto } from './dto/me-gusta.dto';
 
 @Controller('publicaciones')
 export class PublicacionesController {

@@ -20,6 +20,17 @@ export class Publicacion {
 
   @Prop({ default: true })
   activo: boolean;
+  @Prop({
+    type: [{
+      usuario: { type: Types.ObjectId, ref: 'Usuario' },
+      fecha: { type: Date, default: Date.now },
+    }],
+    default: [],
+  })
+  meGusta: { usuario: Types.ObjectId, fecha: Date }[];
+
+  @Prop({ default: 0 })
+  cantidadMeGusta: number;
 }
 
 export const PublicacionSchema = SchemaFactory.createForClass(Publicacion);
