@@ -15,6 +15,8 @@ export class PublicacionesController {
   create(@Body() createPublicacioneDto: CreatePublicacionDto) {
     return this.publicacionesService.create(createPublicacioneDto);
   }*/
+
+    //crear publicacion
    @Post()
   @UseInterceptors(FileInterceptor('imagen', {storage:memoryStorage(), limits:{fileSize:5 * 1024 * 1024}}))
   async create(@Body() createPublicacionDto: CreatePublicacionDto, @UploadedFile() imagen: Express.Multer.File) {
@@ -22,6 +24,16 @@ export class PublicacionesController {
       createPublicacionDto.imagen = await this.archivosService.subirImagen(imagen);
     }
     return this.publicacionesService.create(createPublicacionDto);
+  }
+  //sumar me gusta
+    @Post(':id/me-gusta')
+  darMeGusta(@Param('id') id: string, @Body() meGustaDto: MeGustaDto) {
+    return this.publicacionesService.darMeGusta(id, meGustaDto.usuario);
+  }
+//restar ,e guista
+  @Delete(':id/me-gusta/:usuario')
+  sacarMeGusta(@Param('id') id: string, @Param('usuario') usuario: string) {
+    return this.publicacionesService.sacarMeGusta(id, usuario);
   }
 
     
