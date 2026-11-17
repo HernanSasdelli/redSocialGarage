@@ -28,4 +28,18 @@ export class PublicacionesService {
     return this.http.get<Publicacion[]>(environment.apiUrl + '/publicaciones');
   }
 
+  darMeGusta(idPublicacion: string, usuario: string) {
+   return this.http.post<Publicacion>(environment.apiUrl + '/publicaciones/' +
+    idPublicacion + '/me-gusta', {usuario:usuario});
+
+  }
+
+  sacarMeGusta(idPublicacion: string, usuario: string) {
+    return this.http.delete<Publicacion>(environment.apiUrl + '/publicaciones/' +
+    idPublicacion + '/me-gusta/' + usuario);
+  }
+
+
+
+
 }

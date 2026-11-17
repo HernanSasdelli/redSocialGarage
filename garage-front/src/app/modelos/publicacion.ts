@@ -5,9 +5,11 @@ export interface Publicacion {
     imagen?:string;
     fecha: string;
     autor: Autor;
+    meGusta: MeGusta[];
+    cantidadMeGusta: number;
 
     //agregar cuando llegue
-    meGusta?: MeGusta[];
+    
     comentarios?: Comentarios[];
 }
 
