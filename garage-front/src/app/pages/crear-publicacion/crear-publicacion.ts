@@ -22,6 +22,8 @@ export class CrearPublicacion {
   imagen: File | null = null;
   vistaPrevia = '';
   mensajeError = signal('');
+  enviando = signal(false); //para que no se duplique la publicacion si se hace click 
+                            //varias veces en el boton publicar
 
   //Constructor
   constructor(private router: Router, private auth: Auth, private publicacionesService: PublicacionesService) {}
@@ -54,7 +56,10 @@ export class CrearPublicacion {
       this.formPublicacion.markAllAsTouched();
       return;
     }
-
+        //si ya se esta mandando, no mando otra vez
+    if (this.enviando()) {
+      return;
+    }
     const usuario = this.auth.usuarioActual();
 
     this.publicacionesService.crear(
