@@ -26,6 +26,13 @@
     }
     <input type="file" accept="image/*" (change)="elegirImagen($event)" hidden />
   </label>
+    <button type="submit" [disabled]="enviando()">
+      @if (enviando()) {
+        Publicando...
+      } @else {
+        Publicar
+      }
+    </button>
 
   <button type="submit">Publicar</button>
 

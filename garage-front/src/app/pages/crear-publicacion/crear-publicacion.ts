@@ -51,16 +51,17 @@ export class CrearPublicacion {
   //Publicar
   publicar() {
     this.mensajeError.set('');
-
+    //si ya se esta mandando, no mando otra vez
+    if (this.enviando()) {
+      return;
+    }
     if (this.formPublicacion.invalid) {
       this.formPublicacion.markAllAsTouched();
       return;
     }
-        //si ya se esta mandando, no mando otra vez
-    if (this.enviando()) {
-      return;
-    }
+ 
     const usuario = this.auth.usuarioActual();
+    this.enviando.set(true);
 
     this.publicacionesService.crear(
       this.formPublicacion.value.titulo!,
