@@ -24,8 +24,8 @@ export class UsuariosService {
     return await this.usuarioModel.create(createUsuarioDto);
   }
 
-  async findAll() {
-    return await this.usuarioModel.find();
+  async findAll() {//sin sacar la clave mostraba todo en el back de vercel
+    return await this.usuarioModel.find().select('-clave');
   }
 
   async findOne(id: string) {

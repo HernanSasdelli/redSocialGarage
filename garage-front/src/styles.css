@@ -44,7 +44,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 16px;
-  background-image: url('/fondo-entrada.png');
+  background-image: url('/fondo.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
