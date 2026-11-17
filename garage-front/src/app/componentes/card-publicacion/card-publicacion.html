@@ -17,7 +17,11 @@
   
 
   <footer class="card-acciones">
-    <button type="button">❤ {{ publicacion().meGusta?.length ?? 0 }}</button>
+    <app-rueda-me-gusta
+      [encendida]="yaDiMeGusta()"
+      [cantidad]="cantidadMeGusta()"
+      (tocar)="tocarMeGusta()" />
+   
     <span>💬 {{ publicacion().comentarios?.length ?? 0 }}</span>
   </footer>
 
