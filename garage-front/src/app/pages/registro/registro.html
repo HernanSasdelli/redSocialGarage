@@ -1,5 +1,5 @@
 <section class="pantalla">
-     <video class="video-fondo" src="auto.mp4" autoplay muted loop playsinline></video>
+    <video class="video-fondo" src="auto.mp4" autoplay muted [muted]="true" loop playsinline></video>
     <form class="recuadro" [formGroup]="formRegistro" (ngSubmit)="registrarme()">
         <h1 class="logo">garaje</h1>
         <h2>Crear cuenta</h2>
