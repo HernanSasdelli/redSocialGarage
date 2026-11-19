@@ -44,7 +44,7 @@ export class Login {
     //console.log(this.formLogin.value);
     this.auth.login(this.formLogin.value.correo!, this.formLogin.value.clave!).subscribe({
       next: (usuario)=> {
-        this.auth.guardarUsuario(usuario);
+        this.auth.guardarSesion(usuario);
         this.router.navigate(['/garage/perfil']);
       },
       error: (error)=> {
