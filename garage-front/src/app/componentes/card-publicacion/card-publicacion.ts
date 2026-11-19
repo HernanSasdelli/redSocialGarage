@@ -10,6 +10,8 @@ import { Ocultar } from '../../directivas/ocultar';
 import { Modal } from '../modal/modal';
 import { Router } from '@angular/router';
 
+
+
 @Component({
   imports: [ DatePipe, RuedaMeGusta, Ocultar, Modal],
   selector: 'app-card-publicacion',

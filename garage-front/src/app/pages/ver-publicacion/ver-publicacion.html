@@ -10,9 +10,10 @@
   <h2>Comentarios ({{ total() }})</h2>
 
   <form [formGroup]="formComentario" (ngSubmit)="comentar()" class="comentar">
-    <textarea formControlName="texto" rows="2" placeholder="Escribí un comentario"></textarea>
+    <textarea formControlName="texto" rows="2" maxlength="200" placeholder="Escribí un comentario"></textarea>
     <button type="submit" [disabled]="formComentario.invalid">Comentar</button>
   </form>
+  <span class="contador" [class.poco]="(formComentario.controls.texto.value | restantes:200) < 20">{{ formComentario.controls.texto.value | restantes:200 }} caracteres</span>
 
   @for (comentario of comentarios(); track comentario._id) {
     <article class="comentario">
@@ -25,8 +26,22 @@
             · editado
           }
         </small>
-        <p>{{ comentario.texto }}</p>
+
+        @if (editando() === comentario._id) {
+          <form [formGroup]="formEditar" (ngSubmit)="guardarEdicion()" class="editar">
+            <textarea formControlName="texto" rows="2" maxlength="200"></textarea>
+            <span class="contador" [class.poco]="(formEditar.controls.texto.value | restantes:200) < 20">{{ formEditar.controls.texto.value | restantes:200 }} caracteres</span>
+            <button type="submit" [disabled]="formEditar.invalid">Guardar</button>
+            <button type="button" class="cancelar" (click)="cancelarEditar()">Cancelar</button>
+          </form>
+        } @else {
+          <p>{{ comentario.texto }}</p>
+        }
       </div>
+
+      <button class="lapiz" *appOcultar="!esMio(comentario)" title="Editar" (click)="empezarEditar(comentario)">
+        <svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4zM14 6l4 4"/></svg>
+      </button>
     </article>
   } @empty {
     <p class="vacio">Todavía no hay comentarios.</p>

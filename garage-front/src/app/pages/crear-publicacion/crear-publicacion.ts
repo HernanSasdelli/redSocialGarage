@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 import { Auth } from '../../servicios/auth';
 import { PublicacionesService } from '../../servicios/publicaciones';
 import { HttpErrorResponse } from '@angular/common/http';
+import { RestantesPipe } from '../../pipes/restantes-pipe';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RestantesPipe],
   selector: 'app-crear-publicacion',
   styleUrl: './crear-publicacion.css',
   templateUrl: './crear-publicacion.html',
@@ -89,7 +90,8 @@ export class CrearPublicacion {
       this.mensajeError.set('No se pudo publicar, probá de nuevo');
     }
   }
-    //cuantos caracteres le quedan a la descripcion-JAS
+  //cuantos caracteres le quedan a la descripcion-JAS
+  //lo mande en un pipe para usar en todos lados.
   caracteresRestantes() {
     const texto = this.formPublicacion.controls.descripcion.value;
     if (texto === null) {

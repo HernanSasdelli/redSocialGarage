@@ -4,12 +4,15 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DatePipe } from '@angular/common';
 import { PublicacionesService } from '../../servicios/publicaciones';
 import { ComentariosService } from '../../servicios/comentarios';
+import { Auth } from '../../servicios/auth';
 import { Publicacion, Comentarios } from '../../modelos/publicacion';
 import { CardPublicacion } from '../../componentes/card-publicacion/card-publicacion';
+import { Ocultar } from '../../directivas/ocultar';
+import { RestantesPipe } from '../../pipes/restantes-pipe';
 
 @Component({
   selector: 'app-ver-publicacion',
-  imports: [ReactiveFormsModule, DatePipe, CardPublicacion],
+  imports: [ReactiveFormsModule, DatePipe, CardPublicacion, Ocultar, RestantesPipe],
   templateUrl: './ver-publicacion.html',
   styleUrl: './ver-publicacion.css',
 })
@@ -19,6 +22,7 @@ export class VerPublicacion {
   private router = inject(Router);
   private publicacionesService = inject(PublicacionesService);
   private comentariosService = inject(ComentariosService);
+  private auth = inject(Auth);
 
   idPublicacion = '';
   publicacion = signal<Publicacion | null>(null);
@@ -27,6 +31,12 @@ export class VerPublicacion {
   limit = 5;
 
   formComentario = new FormGroup({
+    texto: new FormControl('', [Validators.required, Validators.maxLength(200)])
+  });
+
+  editando = signal('');//el id del comentario que estoy editando, vacio si ninguno
+
+  formEditar = new FormGroup({
     texto: new FormControl('', [Validators.required, Validators.maxLength(200)])
   });
 
@@ -73,5 +83,40 @@ export class VerPublicacion {
 
   volverAlFeed() {
     this.router.navigate(['/garage/publicaciones']);
+  }
+
+  //me fijo si el comentario es mio, como en la card
+  esMio(comentario: Comentarios) {
+    const yo = this.auth.usuarioActual()._id;
+    return comentario.autor._id === yo;
+  }
+
+  //abro el cuadrito con el texto que tenia
+  empezarEditar(comentario: Comentarios) {
+    this.editando.set(comentario._id);
+    this.formEditar.setValue({texto:comentario.texto});
+  }
+
+  cancelarEditar() {
+    this.editando.set('');
+  }
+
+  //guardo y reemplazo el comentario en la lista por el que vuelve del back
+  guardarEdicion() {
+    if (this.formEditar.invalid) {
+      return;
+    }
+    const id = this.editando();
+    const texto = this.formEditar.value.texto!;
+    this.comentariosService.editar(id, texto).subscribe((editado) => {
+      const lista = this.comentarios();
+      for (let i = 0; i < lista.length; i++) {
+        if (lista[i]._id === editado._id) {
+          lista[i] = editado;
+        }
+      }
+      this.comentarios.set([...lista]);
+      this.editando.set('');
+    });
   }
 }

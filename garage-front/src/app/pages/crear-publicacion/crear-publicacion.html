@@ -4,6 +4,8 @@
   <label>
     Título
     <input type="text" formControlName="titulo" />
+        <span class="contador" [class.poco]="(formPublicacion.controls.titulo.value | restantes:80)
+           < 10">{{ formPublicacion.controls.titulo.value | restantes:80 }} caracteres</span>
   </label>
   @if (formPublicacion.controls.titulo.touched && formPublicacion.controls.titulo.invalid) {
     <small class="error">Poné un título (máximo 80 caracteres)</small>
@@ -12,7 +14,7 @@
   <label>
     ¿Qué querés contar?
     <textarea formControlName="descripcion" maxlength="400"></textarea>
-    <span class="contador" [class.poco]="caracteresRestantes() < 40">{{ caracteresRestantes() }} caracteres</span>
+        <span class="contador" [class.poco]="(formPublicacion.controls.descripcion.value | restantes:400) < 40">{{ formPublicacion.controls.descripcion.value | restantes:400 }} caracteres</span>
   </label>
   @if (formPublicacion.controls.descripcion.touched && formPublicacion.controls.descripcion.invalid) {
     <small class="error">Escribí algo (máximo 400 caracteres)</small>
