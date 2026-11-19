@@ -1,13 +1,8 @@
-//Se creo asi por defecto
-/*import { Service } from '@angular/core';
-
-@Service()
-export class Auth {}*/
-
-
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+
+
 @Injectable({providedIn:'root'})
 
 export class Auth {
@@ -16,7 +11,7 @@ export class Auth {
 
     private http= inject(HttpClient);
 
-    //Metodo
+    //Metodos
     login(correo:string, clave: string){
         return this.http.post(environment.apiUrl + '/auth/login', {correo:correo, clave:clave});
     }
@@ -52,10 +47,11 @@ export class Auth {
 
     }
 
-    //capturo el usuario y parceo a texto
+    /*//capturo el usuario y parceo a texto
     guardarUsuario(usuario: any) {
         localStorage.setItem('usuario', JSON.stringify(usuario));
-    }
+    }*/
+
 
     //aca lo devuelvo cuando la pagina necesita saber quien es, lo parseo
     usuarioActual() {
@@ -65,9 +61,20 @@ export class Auth {
         }
         return null;
     }
-    
+       
+    guardarSesion(respuesta: any) {
+        localStorage.setItem('usuario',
+        JSON.stringify(respuesta.usuario));
+        localStorage.setItem('token', respuesta.token);
+    }
+
+    //el token para mandarlo en cada pedido
+    tokenActual() {
+        return localStorage.getItem('token');
+    }
     cerrarSesion() {
         localStorage.removeItem('usuario');
+        localStorage.removeItem('token');
     }
 
 }
