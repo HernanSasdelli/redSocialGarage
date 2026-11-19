@@ -29,7 +29,9 @@ export class ComentariosService {
       .populate('autor','nombre apellido usuario foto');
   }
 
-  //los de una publicacion, los mas nuevos primero y de a pedazos
+  //los de una publicacion, los mas nuevos primero y de a 5 con el offset y limit
+
+  
   async buscar(consulta: ConsultaComentariosDto) {
     const filtro = {publicacion:consulta.publicacion, activo:true};
     const pagina = this.consultasService.armarPagina(consulta.offset, consulta.limit);

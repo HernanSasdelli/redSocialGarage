@@ -9,7 +9,8 @@ export interface Publicacion {
     cantidadMeGusta: number;
     cantidadComentarios: number;
 
-
+    //agregar cuando llegue
+    comentarios?: Comentarios[];
 }
 
 export interface Comentarios
