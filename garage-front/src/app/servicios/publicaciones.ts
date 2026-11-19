@@ -54,5 +54,14 @@ export class PublicacionesService {
 
 
 
+  ///Manejo de mis publicaciones
+  borrar(idPublicacion: string, usuario: string) {
+    return this.http.delete(environment.apiUrl + '/publicaciones/' +
+    idPublicacion + '/' + usuario);
+  }
+  
+
+
+
 
 }

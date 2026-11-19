@@ -18,7 +18,7 @@
 <h2>Mis últimas publicaciones</h2>
 
 @for (pub of publicaciones(); track pub._id) {
-  <app-card-publicacion [publicacion]="pub" />
+    <app-card-publicacion [publicacion]="pub" (borrada)="recargar()" />
 }
 
 @if (hayMas()) {

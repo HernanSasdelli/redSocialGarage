@@ -2,6 +2,11 @@
   <div class="ventana">
     <h2>{{ titulo() }}</h2>
     <p>{{ texto() }}</p>
-    <button (click)="tocarBoton()">{{ textoBoton() }}</button>
+    <div class="botones">
+      <button (click)="tocarBoton()">{{ textoBoton() }}</button>
+      @if (textoCancelar() !== '') {
+        <button class="cancelar" (click)="tocarCancelar()">{{ textoCancelar() }}</button>
+      }
+    </div>
   </div>
 </div>

@@ -39,7 +39,7 @@ export class PublicacionesController {
     return this.publicacionesService.sacarMeGusta(id, usuario);
   }
 
-    
+    ///CRUD DE PUBLICACIONES
   @Get()
   findAll(@Query() consulta: ConsultaPublicacionesDto) {
     return this.publicacionesService.buscar(consulta);
@@ -55,8 +55,9 @@ export class PublicacionesController {
     return this.publicacionesService.update(+id, updatePublicacioneDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.publicacionesService.remove(+id);
+  //borrar mi publicacion
+  @Delete(':id/:usuario')
+  borrar(@Param('id') id: string, @Param('usuario') usuario: string) {
+    return this.publicacionesService.borrar(id, usuario);
   }
 }

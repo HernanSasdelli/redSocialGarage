@@ -93,3 +93,26 @@
 .card-comentarios li {
   padding: 4px 0;
 }
+/* tachito */
+.borrar {
+  margin-left: auto;
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.borrar svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--texto-suave);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.borrar:hover svg {
+  stroke: #d64545;
+}

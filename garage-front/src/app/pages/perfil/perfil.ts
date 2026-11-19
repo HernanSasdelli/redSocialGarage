@@ -43,7 +43,12 @@ export class Perfil {
       this.total.set(resultado.total);
     });
   }
-
+    
+  //vacio la lista y traigo de nuevo las ultimas(es para el borrar este)
+  recargar() {
+    this.publicaciones.set([]);
+    this.verMas();
+  }
 
   //veo el largo, si el largo es +chico que el total, hay mas publicaciones
   hayMas() {

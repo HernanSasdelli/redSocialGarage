@@ -5,6 +5,9 @@
       <span class="nombre">{{ publicacion().autor.usuario }}</span>
       <small>{{ publicacion().fecha | date:'dd/MM/yyyy' }}</small>
     </div>
+    <button class="borrar" *appOcultar="esMia()" title="Borrar" (click)="preguntarBorrar()">
+      <svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>
+    </button>
   </header>
 
   <h3>{{ publicacion().titulo }}</h3>
@@ -34,3 +37,14 @@
     </ul>
   }
 </article>
+
+
+@if (confirmando()) {
+<app-modal
+    titulo="¿Borrar publicación?"
+    texto="No se va a poder recuperar."
+    textoBoton="Borrar"
+    textoCancelar="Cancelar"
+    (aceptar)="confirmarBorrar()"
+    (cancelar)="cancelarBorrar()" />
+}

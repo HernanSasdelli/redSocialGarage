@@ -6,7 +6,7 @@
 </div>
 
 @for (pub of publicaciones(); track pub._id) {
-  <app-card-publicacion [publicacion]="pub" />
+  <app-card-publicacion [publicacion]="pub" (borrada)="recargarDespuesDeBorrar()" />
 } @empty {
   <p class="vacio">Todavía no hay publicaciones.</p>
 }

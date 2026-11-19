@@ -35,9 +35,16 @@ export class Publicaciones {
       this.publicaciones.set(resultado.publicaciones);
 
       this.total.set(resultado.total);
-    });
-  
-}
+    });  
+  }
+
+  //si borre la ultima de la pagina vuelvo una para atras
+  recargarDespuesDeBorrar() {
+    if (this.publicaciones().length === 1 && this.offset() > 0) {
+      this.offset.set(this.offset() - this.limit);
+    }
+    this.cargar();
+  }
 
 
   ordenarPor(orden: string) {

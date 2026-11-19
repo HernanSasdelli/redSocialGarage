@@ -7,7 +7,7 @@ import { Model,Types } from 'mongoose';
 
 import { ConsultasService } from '../consultas/consultas.service';
 import { ConsultaPublicacionesDto } from './dto/consulta-publicaciones.dto';
-
+import {ForbiddenException} from '@nestjs/common/exceptions/forbidden.exception';
 
 @Injectable()
 export class PublicacionesService {
@@ -140,7 +140,13 @@ export class PublicacionesService {
     return `This action updates a #${id} publicacione`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} publicacione`;
+  //dar de baja la publicacion.
+  async borrar(id: string, usuario: string) {
+    const publicacion = await this.buscarActiva(id);
+    if (publicacion.autor.toString() !== usuario) {
+      throw new ForbiddenException('No podés borrar una publicación de otro usuario');
+    }
+    await this.publicacionModel.findByIdAndUpdate(id, {activo:false});
+    return {mensaje:'Publicación borrada'};
   }
 }

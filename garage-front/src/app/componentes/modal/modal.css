@@ -34,3 +34,14 @@
   font-size: 16px;
   cursor: pointer;
 }
+.botones {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ventana button.cancelar {
+  background: transparent;
+  color: #f47f20;
+  border: 2px solid #f47f20;
+}

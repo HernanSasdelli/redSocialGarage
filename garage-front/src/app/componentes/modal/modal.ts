@@ -16,4 +16,12 @@ export class Modal {
   tocarBoton() {
     this.aceptar.emit();
   }
+
+textoCancelar = input<string>('');//si viene vacio solo esta el boton de arriba(acepotar)
+cancelar = output<void>();
+
+  tocarCancelar() {
+    this.cancelar.emit();
+  }
+
 }
