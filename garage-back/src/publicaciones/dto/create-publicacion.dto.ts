@@ -11,7 +11,7 @@ export class CreatePublicacionDto {
   @MaxLength(400, { message: 'La descripción puede tener hasta 400 caracteres' })
   descripcion: string;
 
-  @IsMongoId({ message: 'El autor no es válido' })
+  @IsOptional()
   autor: string;
 
   @IsOptional()

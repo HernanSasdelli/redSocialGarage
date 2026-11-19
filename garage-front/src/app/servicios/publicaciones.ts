@@ -15,11 +15,11 @@ export class PublicacionesService {
                          //Metodos
 
   //Crear publicacion (ahora es form data por la foto)
-  crear(titulo: string, descripcion: string, autor: string, imagen: File | null) {
+  crear(titulo: string, descripcion: string,  imagen: File | null) {
     const datos = new FormData();
     datos.append('titulo', titulo);
     datos.append('descripcion', descripcion);
-    datos.append('autor', autor);
+   // datos.append('autor', autor);
     if (imagen) {
       datos.append('imagen', imagen);
     }
@@ -41,23 +41,22 @@ export class PublicacionesService {
 
 
 
-  darMeGusta(idPublicacion: string, usuario: string) {
+  darMeGusta(idPublicacion: string) {
    return this.http.post<Publicacion>(environment.apiUrl + '/publicaciones/' +
-    idPublicacion + '/me-gusta', {usuario:usuario});
+    idPublicacion + '/me-gusta', {});
 
   }
 
-  sacarMeGusta(idPublicacion: string, usuario: string) {
+  sacarMeGusta(idPublicacion: string) {
     return this.http.delete<Publicacion>(environment.apiUrl + '/publicaciones/' +
-    idPublicacion + '/me-gusta/' + usuario);
+    idPublicacion + '/me-gusta/');
   }
 
 
 
   ///Manejo de mis publicaciones
-  borrar(idPublicacion: string, usuario: string) {
-    return this.http.delete(environment.apiUrl + '/publicaciones/' +
-    idPublicacion + '/' + usuario);
+  borrar(idPublicacion: string) {
+    return this.http.delete(environment.apiUrl + '/publicaciones/' + idPublicacion);
   }
   
 

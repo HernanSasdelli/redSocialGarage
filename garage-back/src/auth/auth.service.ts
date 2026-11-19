@@ -55,4 +55,16 @@ export class AuthService {
         const payload = {sub:id, usuario:usuario, tipo:tipo};
         return await this.jwtService.signAsync(payload);
     }
+    
+
+    //si hay un token guardado en LS, haace post si todavia sirve
+    async autorizar(id: string) {
+        return await this.usuariosService.findOne(id);
+    }
+
+   //este es para extender
+    async refrescar(sub: string, usuario: string, tipo: string) {
+        const token = await this.generarToken(sub, usuario, tipo);
+        return {token:token};
+    }
 }

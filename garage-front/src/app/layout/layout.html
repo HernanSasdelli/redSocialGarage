@@ -59,3 +59,15 @@
   </aside>
 
 </div>
+
+
+
+@if (avisoSesion()) {
+<app-modal
+    titulo="Tu sesión está por vencer"
+    texto="Te quedan 30 segundos."
+    textoBoton="Extender"
+    textoCancelar="Cancelar"
+    (aceptar)="extenderSesion()"
+    (cancelar)="cancelarAviso()" />
+}

@@ -1,13 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete,UseInterceptors,UploadedFile, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete,UseInterceptors,UploadedFile,UseGuards, Query,Req } from '@nestjs/common';
 import { PublicacionesService } from './publicaciones.service';
 import { CreatePublicacionDto } from './dto/create-publicacion.dto';
-import { UpdatePublicacionDto } from './dto/update-publicacion.dto';
+
 import { ArchivosService } from '../archivos/archivos.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { MeGustaDto } from './dto/me-gusta.dto';
 
 import { ConsultaPublicacionesDto } from './dto/consulta-publicaciones.dto';
+import { AuthGuard } from '../guards/auth/auth.guard';
 
 @Controller('publicaciones')
 export class PublicacionesController {
@@ -20,44 +21,55 @@ export class PublicacionesController {
   }*/
 
     //crear publicacion
-   @Post()
+  @UseGuards(AuthGuard)
+  @Post()
   @UseInterceptors(FileInterceptor('imagen', {storage:memoryStorage(), limits:{fileSize:5 * 1024 * 1024}}))
-  async create(@Body() createPublicacionDto: CreatePublicacionDto, @UploadedFile() imagen: Express.Multer.File) {
+ 
+  async create(@Body() createPublicacionDto: CreatePublicacionDto, @UploadedFile() imagen: Express.Multer.File,
+    @Req() pedido: any) {
+    createPublicacionDto.autor = pedido.user.sub;
     if (imagen) {
       createPublicacionDto.imagen = await this.archivosService.subirImagen(imagen);
     }
     return this.publicacionesService.create(createPublicacionDto);
   }
+
+  
   //sumar me gusta
-    @Post(':id/me-gusta')
-  darMeGusta(@Param('id') id: string, @Body() meGustaDto: MeGustaDto) {
-    return this.publicacionesService.darMeGusta(id, meGustaDto.usuario);
+  @UseGuards(AuthGuard)
+  @Post(':id/me-gusta')
+  darMeGusta(@Param('id') id: string, @Req() pedido: any) {
+    const usuario= pedido.user.sub; //ahora lo saco del token
+    return this.publicacionesService.darMeGusta(id, usuario);
   }
-//restar ,e guista
+//restar me gusta
+@UseGuards(AuthGuard)
   @Delete(':id/me-gusta/:usuario')
-  sacarMeGusta(@Param('id') id: string, @Param('usuario') usuario: string) {
+  sacarMeGusta(@Param('id') id: string, @Req() pedido: any) {
+    const usuario= pedido.user.sub; //ahora lo saco del token
     return this.publicacionesService.sacarMeGusta(id, usuario);
   }
 
     ///CRUD DE PUBLICACIONES
+  @UseGuards(AuthGuard)
   @Get()
   findAll(@Query() consulta: ConsultaPublicacionesDto) {
     return this.publicacionesService.buscar(consulta);
   }
 
+  @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.publicacionesService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePublicacioneDto: UpdatePublicacionDto) {
-    return this.publicacionesService.update(+id, updatePublicacioneDto);
-  }
+
 
   //borrar mi publicacion
-  @Delete(':id/:usuario')
-  borrar(@Param('id') id: string, @Param('usuario') usuario: string) {
+  @UseGuards(AuthGuard)
+  @Delete(':id/')
+  borrar(@Param('id') id: string,@Req() pedido:any) {
+    const usuario = pedido.user.sub;
     return this.publicacionesService.borrar(id, usuario);
   }
 }

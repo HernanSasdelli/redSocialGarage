@@ -77,4 +77,28 @@ export class Auth {
         localStorage.removeItem('token');
     }
 
+    vencimientoToken() {
+        const token = this.tokenActual();
+        if (!token) {
+            return 0;
+        }
+        const partes = token.split('.');
+        const payload = JSON.parse(atob(partes[1]));
+        return payload.exp * 1000;
+    }
+
+    refrescar() {
+        return this.http.post(environment.apiUrl + '/auth/refrescar', {});
+    }
+
+    guardarToken(token: string) {
+        localStorage.setItem('token', token);
+    }
+
+    autorizar() {
+        return this.http.post(environment.apiUrl + '/auth/autorizar', {});
+    }
+    
+
+
 }

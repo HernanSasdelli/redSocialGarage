@@ -10,7 +10,7 @@ import { Ocultar } from '../../directivas/ocultar';
 import { Modal } from '../modal/modal';
 
 @Component({
-  imports: [ DatePipe, RuedaMeGusta, Ocultar, Modal ],
+  imports: [ DatePipe, RuedaMeGusta, Ocultar, Modal],
   selector: 'app-card-publicacion',
   styleUrl: './card-publicacion.css',
   templateUrl: './card-publicacion.html',
@@ -53,9 +53,9 @@ export class CardPublicacion {
     const yo = this.auth.usuarioActual()._id;
     const id = this.publicacion()._id;
     if (this.yaDiMeGusta()) {
-      this.publicacionesService.sacarMeGusta(id, yo).subscribe(publicacion => this.mostrarMeGusta(publicacion));
+      this.publicacionesService.sacarMeGusta(id).subscribe(publicacion => this.mostrarMeGusta(publicacion));
     } else {
-      this.publicacionesService.darMeGusta(id, yo).subscribe(publicacion => this.mostrarMeGusta(publicacion));
+      this.publicacionesService.darMeGusta(id).subscribe(publicacion => this.mostrarMeGusta(publicacion));
     }
   }
 
@@ -76,9 +76,9 @@ export class CardPublicacion {
 
   //si dijo que si, la borro y aviso
   confirmarBorrar() {
-    const yo = this.auth.usuarioActual()._id;
+   // const yo = this.auth.usuarioActual()._id;
     const id = this.publicacion()._id;
-    this.publicacionesService.borrar(id, yo).subscribe(() => {
+    this.publicacionesService.borrar(id).subscribe(() => {
       this.confirmando.set(false);
       this.borrada.emit();
     });

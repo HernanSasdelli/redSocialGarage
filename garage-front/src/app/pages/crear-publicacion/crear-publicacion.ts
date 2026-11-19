@@ -60,13 +60,13 @@ export class CrearPublicacion {
       return;
     }
  
-    const usuario = this.auth.usuarioActual();
+   
     this.enviando.set(true);
 
     this.publicacionesService.crear(
       this.formPublicacion.value.titulo!,
       this.formPublicacion.value.descripcion!,
-      usuario._id,
+  
       this.imagen
     ).subscribe({
       next: () => this.router.navigate(['/garage/publicaciones']),
