@@ -17,7 +17,7 @@ export class Cargando {
   ngOnInit() {
     setTimeout(() => {
       this.validarSesion();
-    }, 13000);
+    }, 3000);
   }
 
   //si no hay token al login, si hay le pregunto al back
