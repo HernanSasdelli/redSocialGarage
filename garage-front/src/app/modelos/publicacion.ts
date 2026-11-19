@@ -38,3 +38,16 @@ export interface Resultado {
     publicaciones: Publicacion[];
     total: number;
 }
+export interface Comentarios
+{
+    _id: string;
+    autor: Autor;
+    texto: string;
+    fecha: string;
+    publicacion: string;
+    modificado: boolean;
+}
+export interface ResultadoComentarios {
+    comentarios: Comentarios[];
+    total: number;
+}

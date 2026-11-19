@@ -10,6 +10,7 @@ import { NoEncontrada } from './pages/no-encontrada/no-encontrada';
 
 import { authGuard } from './guards/auth-guard';
 import { Cargando } from './pages/cargando/cargando';
+import { VerPublicacion } from './pages/ver-publicacion/ver-publicacion';
 
 export const routes: Routes = [
      { path:'', component: Cargando},
@@ -18,6 +19,7 @@ export const routes: Routes = [
      { path: 'garage', component: Layout,
           canActivate: [authGuard],
           children: [
+               { path: 'publicacion/:id', component: VerPublicacion },
                { path: 'perfil', component: Perfil },
                { path: 'publicar', component: CrearPublicacion },
                { path: 'publicaciones', component: Publicaciones},

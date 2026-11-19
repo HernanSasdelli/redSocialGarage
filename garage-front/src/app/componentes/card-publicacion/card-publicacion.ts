@@ -8,6 +8,7 @@ import { PublicacionesService } from '../../servicios/publicaciones';
 import { RuedaMeGusta } from '../rueda-me-gusta/rueda-me-gusta';
 import { Ocultar } from '../../directivas/ocultar';
 import { Modal } from '../modal/modal';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [ DatePipe, RuedaMeGusta, Ocultar, Modal],
@@ -22,6 +23,7 @@ export class CardPublicacion {
 
   private auth = inject(Auth);
   private publicacionesService = inject(PublicacionesService);
+  private router = inject(Router);
 
       //manejo me gusta
   yaDiMeGusta = signal(false);
@@ -82,6 +84,12 @@ export class CardPublicacion {
       this.confirmando.set(false);
       this.borrada.emit();
     });
+  }
+
+
+    abrirPubliGrande() {
+    const id = this.publicacion()._id;
+    this.router.navigate(['/garage/publicacion', id]);
   }
 
 }

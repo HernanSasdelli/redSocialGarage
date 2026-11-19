@@ -116,3 +116,8 @@
 .borrar:hover svg {
   stroke: #d64545;
 }
+
+/* titulo e imagen llevan a la publicacion en grande */
+.abrir {
+  cursor: pointer;
+}

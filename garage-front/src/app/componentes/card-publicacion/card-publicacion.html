@@ -10,11 +10,12 @@
     </button>
   </header>
 
-  <h3>{{ publicacion().titulo }}</h3>
+    <h3 class="abrir" (click)="abrirPubliGrande()">{{ publicacion().titulo }}</h3>
   <p>{{ publicacion().descripcion }}</p>
 
   @if (publicacion().imagen) {
-    <img class="card-imagen" [src]="publicacion().imagen" alt="Imagen" />
+    <!-- <img class="card-imagen" [src]="publicacion().imagen" alt="Imagen" /> -->
+    <img class="card-imagen abrir" [src]="publicacion().imagen" alt="Imagen" (click)="abrirPubliGrande()" />
   }
 
   <footer class="card-acciones">

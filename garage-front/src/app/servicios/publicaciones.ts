@@ -30,7 +30,7 @@ export class PublicacionesService {
     return this.http.get<Publicacion[]>(environment.apiUrl + '/publicaciones');
   }*/
 
-  
+  //este es el traer todas.. con limit y offset  en orden
   traer(orden: string, offset: number, limit: number, autor?: string) {
     let direccion = environment.apiUrl + '/publicaciones?orden=' + orden + '&offset=' + offset + '&limit=' + limit;
     if (autor) {
@@ -59,6 +59,10 @@ export class PublicacionesService {
     return this.http.delete(environment.apiUrl + '/publicaciones/' + idPublicacion);
   }
   
+
+  traerUnaPublicacion(id: string) {
+    return this.http.get<Publicacion>(environment.apiUrl + '/publicaciones/' + id);
+  }
 
 
 

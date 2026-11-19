@@ -1,0 +1,112 @@
+.volver {
+  background: none;
+  border: none;
+  color: var(--texto-suave);
+  cursor: pointer;
+  margin-bottom: 12px;
+  padding: 0;
+}
+
+.comentarios {
+  background: var(--modulo);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 4px 14px rgba(16, 24, 32, 0.08);
+}
+
+.comentarios h2 {
+  margin: 0 0 14px;
+  font-size: 17px;
+}
+
+.comentar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.comentar textarea {
+  flex: 1;
+  resize: none;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #c9d6e2;
+  font-family: inherit;
+}
+
+.comentar button,
+.mas {
+  background: #f47f20;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.comentar button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.comentario {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid #e3ecf3;
+}
+
+.comentario img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cuerpo {
+  flex: 1;
+}
+
+.cuerpo .nombre {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.cuerpo small {
+  color: var(--texto-suave);
+  font-size: 12px;
+}
+
+.cuerpo p {
+  margin: 4px 0 0;
+}
+
+.mas {
+  display: block;
+  margin: 12px auto 0;
+}
+
+.vacio {
+  color: var(--texto-suave);
+}
+.volver {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 12px;
+  padding: 4px;
+}
+
+.volver svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--texto);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.volver:hover svg {
+  stroke: #f47f20;
+}

@@ -1,0 +1,38 @@
+<button type="button" class="volver" (click)="volverAlFeed()" title="Volver">
+  <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+</button>
+
+@if (publicacion()) {
+  <app-card-publicacion [publicacion]="publicacion()!" (borrada)="volverAlFeed()" />
+}
+
+<section class="comentarios">
+  <h2>Comentarios ({{ total() }})</h2>
+
+  <form [formGroup]="formComentario" (ngSubmit)="comentar()" class="comentar">
+    <textarea formControlName="texto" rows="2" placeholder="Escribí un comentario"></textarea>
+    <button type="submit" [disabled]="formComentario.invalid">Comentar</button>
+  </form>
+
+  @for (comentario of comentarios(); track comentario._id) {
+    <article class="comentario">
+      <img [src]="comentario.autor.foto || 'Piloto.png'" alt="Foto" />
+      <div class="cuerpo">
+        <span class="nombre">{{ comentario.autor.usuario }}</span>
+        <small>
+          {{ comentario.fecha | date:'dd/MM/yyyy HH:mm' }}
+          @if (comentario.modificado) {
+            · editado
+          }
+        </small>
+        <p>{{ comentario.texto }}</p>
+      </div>
+    </article>
+  } @empty {
+    <p class="vacio">Todavía no hay comentarios.</p>
+  }
+
+  @if (hayMas()) {
+    <button type="button" class="mas" (click)="cargarMas()">Cargar más</button>
+  }
+</section>
