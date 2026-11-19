@@ -38,9 +38,9 @@ export class CrearPublicacion {
     if (!archivo) {
       return;
     }
-    //maximo 5 MB, igual que en el back
-    if (archivo.size > 5 * 1024 * 1024) {
-      this.mensajeError.set('La imagen no puede pesar más de 5 MB');
+    //maximo 4 MB, vercel corta en 4.5 no en 5
+    if (archivo.size > 4 * 1024 * 1024) {
+      this.mensajeError.set('La imagen no puede pesar más de 4 MB');
       evento.target.value = '';
       return;
     }

@@ -23,7 +23,7 @@ export class PublicacionesController {
     //crear publicacion
   @UseGuards(AuthGuard)
   @Post()
-  @UseInterceptors(FileInterceptor('imagen', {storage:memoryStorage(), limits:{fileSize:5 * 1024 * 1024}}))
+  @UseInterceptors(FileInterceptor('imagen', {storage:memoryStorage(), limits:{fileSize:4 * 1024 * 1024}}))
  
   async create(@Body() createPublicacionDto: CreatePublicacionDto, @UploadedFile() imagen: Express.Multer.File,
     @Req() pedido: any) {

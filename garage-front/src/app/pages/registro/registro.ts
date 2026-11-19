@@ -101,8 +101,8 @@ export class Registro {
         if (!archivo) {
           return;
         }        
-        if (archivo.size > 5 * 1024 * 1024) {
-          this.mensajeError.set('La imagen no puede pesar más de 5 MB');
+        if (archivo.size > 4 * 1024 * 1024) {
+          this.mensajeError.set('La imagen no puede pesar más de 4 MB');
           evento.target.value = '';
           return;
         }

@@ -3,7 +3,7 @@
 </button>
 
 @if (publicacion()) {
-  <app-card-publicacion [publicacion]="publicacion()!" (borrada)="volverAlFeed()" />
+  <app-card-publicacion [publicacion]="publicacion()!" [mostrarComentarios]="false" (borrada)="volverAlFeed()" />
 }
 
 <section class="comentarios">

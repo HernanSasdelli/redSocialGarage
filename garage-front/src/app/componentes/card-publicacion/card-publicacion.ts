@@ -9,6 +9,8 @@ import { RuedaMeGusta } from '../rueda-me-gusta/rueda-me-gusta';
 import { Ocultar } from '../../directivas/ocultar';
 import { Modal } from '../modal/modal';
 import { Router } from '@angular/router';
+import { ComentariosService } from '../../servicios/comentarios';
+import { Comentarios } from '../../modelos/publicacion';
 
 
 
@@ -26,6 +28,7 @@ export class CardPublicacion {
   private auth = inject(Auth);
   private publicacionesService = inject(PublicacionesService);
   private router = inject(Router);
+  private comentariosService = inject(ComentariosService);
 
       //manejo me gusta
   yaDiMeGusta = signal(false);
@@ -35,8 +38,20 @@ export class CardPublicacion {
   confirmando = signal(false);
   borrada = output<void>();
 
+      //ultimos comentarios abajo de la card
+  mostrarComentarios = input(true);//en la pagina grande viene en false
+  comentarios = signal<Comentarios[]>([]);
+
   ngOnInit() {
     this.mostrarMeGusta(this.publicacion());
+
+    //traigo los 2 ultimos comentarios
+    if (this.mostrarComentarios()) {
+      const id = this.publicacion()._id;
+      this.comentariosService.traer(id, 0, 2).subscribe((resultado) => {
+        this.comentarios.set(resultado.comentarios);
+      });
+    }
   }
 
   //se fija si yo estoy en la lista y guarda el numero

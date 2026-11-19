@@ -83,6 +83,12 @@
 
 .cuerpo {
   flex: 1;
+  min-width: 0;
+}
+
+.cuerpo p {
+  margin: 4px 0 0;
+  overflow-wrap: anywhere;
 }
 
 .cuerpo .nombre {

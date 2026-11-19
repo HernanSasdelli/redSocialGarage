@@ -37,11 +37,13 @@
 .card h3 {
   margin: 14px 0 6px;
   font-size: 17px;
+  overflow-wrap: anywhere;
 }
 
 .card p {
   margin: 0 0 12px;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 /* la imagen entra entera, sin recortarse */
@@ -92,6 +94,7 @@
 
 .card-comentarios li {
   padding: 4px 0;
+  overflow-wrap: anywhere;
 }
 /* tachito */
 .borrar {
@@ -119,4 +122,12 @@
 
 .abrir {
   cursor: pointer;
+}
+
+/* link a la pagina grande cuando hay mas de 2 comentarios */
+.ver-todos {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #f47f20;
 }
