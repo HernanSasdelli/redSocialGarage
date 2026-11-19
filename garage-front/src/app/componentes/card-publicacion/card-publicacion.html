@@ -15,7 +15,7 @@
 
   @if (publicacion().imagen) {
     <!-- <img class="card-imagen" [src]="publicacion().imagen" alt="Imagen" /> -->
-    <img class="card-imagen abrir" [src]="publicacion().imagen" alt="Imagen" (click)="abrirPubliGrande()" />
+    <img class="card-imagen abrir" [src]="publicacion().imagen" alt="Imagen" (click)="abrirPubliGrande()" [appZoom]="1.05" />
   }
 
   <footer class="card-acciones">
