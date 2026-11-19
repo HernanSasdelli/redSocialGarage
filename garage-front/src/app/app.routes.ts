@@ -9,9 +9,10 @@ import { Publicaciones } from './pages/publicaciones/publicaciones';
 import { NoEncontrada } from './pages/no-encontrada/no-encontrada';
 
 import { authGuard } from './guards/auth-guard';
+import { Cargando } from './pages/cargando/cargando';
 
 export const routes: Routes = [
-     { path:'', redirectTo: 'login', pathMatch: 'full'},
+     { path:'', component: Cargando},
      { path:'login', component: Login},
      { path:'registro', component: Registro},
      { path: 'garage', component: Layout,

@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from '../../servicios/auth';
 
-import {Inject, signal} from '@angular/core'
 
-;
 @Component({
   imports: [],
   selector: 'app-cargando',
@@ -13,8 +11,8 @@ import {Inject, signal} from '@angular/core'
 })
 export class Cargando {
  //constructor(private router: Router, private auth: Auth) {}
-  private auth = Inject(Auth);
-  private router = Inject(Router);
+  private auth = inject(Auth);
+  private router = inject(Router);
 
   ngOnInit() {
     setTimeout(() => {

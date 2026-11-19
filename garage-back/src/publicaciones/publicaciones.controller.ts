@@ -34,7 +34,7 @@ export class PublicacionesController {
     return this.publicacionesService.create(createPublicacionDto);
   }
 
-  
+
   //sumar me gusta
   @UseGuards(AuthGuard)
   @Post(':id/me-gusta')
@@ -44,7 +44,7 @@ export class PublicacionesController {
   }
 //restar me gusta
 @UseGuards(AuthGuard)
-  @Delete(':id/me-gusta/:usuario')
+  @Delete(':id/me-gusta')
   sacarMeGusta(@Param('id') id: string, @Req() pedido: any) {
     const usuario= pedido.user.sub; //ahora lo saco del token
     return this.publicacionesService.sacarMeGusta(id, usuario);
