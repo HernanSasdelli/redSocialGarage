@@ -7,20 +7,20 @@ import { Model, Types } from 'mongoose';
 import { Comentario } from './entities/comentario.entity';
 import { ConsultaComentariosDto } from './dto/consulta-comentarios.dto';
 import { ConsultasService } from '../consultas/consultas.service';
-import { Publicacion } from '../publicaciones/entities/publicacion.entity';//nuevo
+import { Publicacion } from '../publicaciones/entities/publicacion.entity';
 
 @Injectable()
 export class ComentariosService {
 
   constructor(@InjectModel(Comentario.name) private comentarioModel: Model<Comentario>,
     private consultasService: ConsultasService,
-    @InjectModel(Publicacion.name) private publicacionModel: Model<Publicacion>) {}//nuevo
+    @InjectModel(Publicacion.name) private publicacionModel: Model<Publicacion>) {}
 
   //guardo el comentario y lo devuelvo con el autor para mostrarlo
   async create(createComentarioDto: CreateComentarioDto) {
     const nuevo = await this.comentarioModel.create(createComentarioDto);
 
-    //nuevo, cuento los comentarios activos y lo guardo en la publicacion
+    //cuento los comentarios activos y lo guardo en la publicacion
     const cantidad = await this.comentarioModel.countDocuments({publicacion:createComentarioDto.publicacion, activo:true});
     await this.publicacionModel.findByIdAndUpdate(createComentarioDto.publicacion, {cantidadComentarios:cantidad});
 

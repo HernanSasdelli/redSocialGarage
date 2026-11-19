@@ -9,10 +9,11 @@ import { Publicacion, Comentarios } from '../../modelos/publicacion';
 import { CardPublicacion } from '../../componentes/card-publicacion/card-publicacion';
 import { Ocultar } from '../../directivas/ocultar';
 import { RestantesPipe } from '../../pipes/restantes-pipe';
+import { FotoPerfilPipe } from '../../pipes/foto-perfil-pipe';
 
 @Component({
   selector: 'app-ver-publicacion',
-  imports: [ReactiveFormsModule, DatePipe, CardPublicacion, Ocultar, RestantesPipe],
+  imports: [ReactiveFormsModule, DatePipe, CardPublicacion, Ocultar, RestantesPipe, FotoPerfilPipe],
   templateUrl: './ver-publicacion.html',
   styleUrl: './ver-publicacion.css',
 })

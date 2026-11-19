@@ -1,9 +1,9 @@
 <article class="card">
   <header class="card-autor">
-    <img [src]="publicacion().autor.foto || 'Piloto.png'" alt="Foto" />
+    <img [src]="publicacion().autor.foto | fotoPerfil" alt="Foto" />
     <div>
       <span class="nombre">{{ publicacion().autor.usuario }}</span>
-      <small>{{ publicacion().fecha | date:'dd/MM/yyyy' }}</small>
+      <small>{{ publicacion().fecha | tiempoRelativo }}</small>
     </div>
     <button class="borrar" *appOcultar="!esMia()" title="Borrar" (click)="preguntarBorrar()">
       <svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>

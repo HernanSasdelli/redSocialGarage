@@ -17,7 +17,7 @@
 
   @for (comentario of comentarios(); track comentario._id) {
     <article class="comentario">
-      <img [src]="comentario.autor.foto || 'Piloto.png'" alt="Foto" />
+      <img [src]="comentario.autor.foto | fotoPerfil" alt="Foto" />
       <div class="cuerpo">
         <span class="nombre">{{ comentario.autor.usuario }}</span>
         <small>

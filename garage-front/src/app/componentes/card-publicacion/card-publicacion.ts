@@ -11,11 +11,13 @@ import { Modal } from '../modal/modal';
 import { Router } from '@angular/router';
 import { ComentariosService } from '../../servicios/comentarios';
 import { Comentarios } from '../../modelos/publicacion';
+import { TiempoRelativoPipe } from '../../pipes/tiempo-relativo-pipe';
+import { FotoPerfilPipe } from '../../pipes/foto-perfil-pipe';
 
 
 
 @Component({
-  imports: [ DatePipe, RuedaMeGusta, Ocultar, Modal],
+  imports: [ DatePipe, RuedaMeGusta, Ocultar, Modal, TiempoRelativoPipe, FotoPerfilPipe],
   selector: 'app-card-publicacion',
   styleUrl: './card-publicacion.css',
   templateUrl: './card-publicacion.html',
