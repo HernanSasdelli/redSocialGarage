@@ -31,6 +31,9 @@ export class Publicacion {
 
   @Prop({ default: 0 })
   cantidadMeGusta: number;
+
+  @Prop({ default: 0 })
+  cantidadComentarios: number;
 }
 
 export const PublicacionSchema = SchemaFactory.createForClass(Publicacion);

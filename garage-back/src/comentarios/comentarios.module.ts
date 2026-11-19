@@ -5,10 +5,12 @@ import { ComentariosController } from './comentarios.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Comentario, ComentarioSchema } from './entities/comentario.entity';
 import {ConsultasModule} from '../consultas/consultas.module';
+import { Publicacion, PublicacionSchema } from '../publicaciones/entities/publicacion.entity';//nuevo
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Comentario.name, schema: ComentarioSchema }]),
+    MongooseModule.forFeature([{ name: Comentario.name, schema: ComentarioSchema },
+      { name: Publicacion.name, schema: PublicacionSchema }]),
     ConsultasModule
   ],
   controllers: [ComentariosController],

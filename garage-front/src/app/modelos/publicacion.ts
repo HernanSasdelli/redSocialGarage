@@ -7,10 +7,9 @@ export interface Publicacion {
     autor: Autor;
     meGusta: MeGusta[];
     cantidadMeGusta: number;
+    cantidadComentarios: number;
 
-    //agregar cuando llegue
-    
-    comentarios?: Comentarios[];
+
 }
 
 export interface Comentarios
