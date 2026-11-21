@@ -8,6 +8,10 @@
   max-width: 700px;
 }
 
+.perfil-foto {
+  flex-shrink: 0;
+}
+
 .perfil-foto img {
   width: 140px;
   height: 140px;
@@ -17,6 +21,8 @@
 
 .perfil-datos {
   flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .perfil-datos h1 {

@@ -5,6 +5,7 @@ import { CardPublicacion } from '../../componentes/card-publicacion/card-publica
 import { Auth } from '../../servicios/auth';
 import { DatePipe } from '@angular/common';
 import { PublicacionesService } from '../../servicios/publicaciones';
+import { FotoPerfilPipe } from '../../pipes/foto-perfil-pipe';
 
 @Component({
   imports: [CardPublicacion, DatePipe],
